@@ -160,6 +160,7 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
                   },
                 ),
               ),
+              //Spacer(),
               Stack(
                 children: [
                   Row(
@@ -168,8 +169,10 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
                         child: new GestureDetector(
                             onTap: () {},
                             child: SvgPicture.asset(iconHome,
+                                //fit: BoxFit.fitHeight,
                                 matchTextDirection: false)),
                         flex: 1,
+                        //flex: 0,
                       ),
                       Flexible(
                         child: new GestureDetector(
@@ -182,7 +185,9 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
                               );
                             },
                             child: SvgPicture.asset(iconAccount,
+                                //fit: BoxFit.fitHeight,
                                 matchTextDirection: false)),
+                        //flex: 0,
                         flex: 1,
                       ),
                     ],
