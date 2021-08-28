@@ -6,6 +6,7 @@ import 'package:abaadengineering/ui/Collections.dart';
 import 'package:abaadengineering/ui/GovernmentalPayments.dart';
 import 'package:abaadengineering/ui/OfficePayments.dart';
 import 'package:abaadengineering/ui/myaccount/AccountActivity.dart';
+import 'package:abaadengineering/ui/payment_collections/SummeryList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:abaadengineering/styles/my_icons.dart';
@@ -15,19 +16,22 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 class PaymentsAndCollections extends StatefulWidget {
   final Projects project;
   var monthName;
+  var monthNumber;
   var year;
 
-  PaymentsAndCollections({Key key, this.project, this.monthName, this.year})
+  PaymentsAndCollections(
+      {Key key, this.project, this.monthName, this.monthNumber, this.year})
       : super(key: key);
   @override
   _PaymentsAndCollectionsState createState() => _PaymentsAndCollectionsState();
 }
 
 class _PaymentsAndCollectionsState extends State<PaymentsAndCollections> {
-  var projectMonth, projectYear;
+  var projectMonth, projectYear, projectMonthNumber;
   @override
   Widget build(BuildContext context) {
     Projects _porject = widget.project;
+    projectMonthNumber = widget.monthNumber;
     projectMonth = widget.monthName.toString();
     projectYear = widget.year.toString();
 
@@ -70,10 +74,10 @@ class _PaymentsAndCollectionsState extends State<PaymentsAndCollections> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 15.0,
-                    height: 30.0,
-                  ),
+                  // SizedBox(
+                  //   width: 15.0,
+                  //   height: 30.0,
+                  // ),
                   SvgPicture.asset(iconLogo,
                       matchTextDirection: false, height: 70.0, width: 68.0),
                   SizedBox(
@@ -106,7 +110,7 @@ class _PaymentsAndCollectionsState extends State<PaymentsAndCollections> {
                                     project: _porject,
                                     paymentType: 'Government Payments',
                                     pageTitle: 'Government \nPayments',
-                                    projectMonth: widget.monthName,
+                                    projectMonth: widget.monthNumber,
                                     projectYear: widget.year),
                               ),
                             );
@@ -147,7 +151,7 @@ class _PaymentsAndCollectionsState extends State<PaymentsAndCollections> {
                                     project: _porject,
                                     paymentType: 'Office Payments',
                                     pageTitle: 'Office \nPayments',
-                                    projectMonth: widget.monthName,
+                                    projectMonth: widget.monthNumber,
                                     projectYear: widget.year),
                               ),
                             );
@@ -188,13 +192,52 @@ class _PaymentsAndCollectionsState extends State<PaymentsAndCollections> {
                                     project: _porject,
                                     paymentType: 'Collections',
                                     pageTitle: 'Collections',
-                                    projectMonth: widget.monthName,
+                                    projectMonth: widget.monthNumber,
                                     projectYear: widget.year),
                               ),
                             );
                           },
                           child: Text(
                             'Collections',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                          // color: Colors.blueAccent,
+
+                          // color: Colors.white,2
+                          // onPressed: _nextActivity,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    Container(
+                      margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        gradient: LinearGradient(
+                            colors: [Color(0xFF2196F3), Color(0xFF38068f)],
+                            begin: Alignment.centerRight,
+                            end: Alignment.centerLeft),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SummaryList(
+                                    project: _porject,
+                                    projectYear: widget.year,
+                                    projectMonth: widget.monthName),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Summary',
                             style: TextStyle(
                               fontSize: 16.0,
                               color: Colors.white,

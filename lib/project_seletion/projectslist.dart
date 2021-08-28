@@ -145,6 +145,7 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
                             )
                           : ListView.builder(
                               padding: EdgeInsets.all(0),
+                              //itemCount: 12,
                               itemCount: listProjects.length,
                               itemBuilder: (context, int index) {
                                 Projects projects = listProjects[index];

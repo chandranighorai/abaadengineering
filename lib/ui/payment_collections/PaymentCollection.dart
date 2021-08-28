@@ -39,9 +39,16 @@ class _PaymentCollectionListState extends State<PaymentCollectionList> {
   String _paymentCategory;
   Future<PaymentModel> mListPayments;
   Future<PaymentModel> _getPayments() async {
-    var projectRequestParam =
-        "project_id=" + _projectId + "&payment_cat=" + _paymentCategory;
+    var projectRequestParam = "project_id=" +
+        _projectId +
+        "&payment_cat=" +
+        _paymentCategory +
+        "&payment_date=" +
+        widget.projectYear +
+        "-" +
+        widget.projectMonth;
     var PROJECT_URL = Consts.CUST_PAYMENTS + "?" + projectRequestParam;
+    print("project Url..." + PROJECT_URL.toString());
     final response = await http.get(Uri.parse(PROJECT_URL));
     if (response.statusCode == 200) {
       debugPrint(response.body);

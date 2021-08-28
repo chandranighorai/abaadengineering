@@ -6,9 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class BasicInformation extends StatefulWidget {
   final option;
-  final name;
+  final fname;
+  final lname;
+  // final name;
   final email;
-  const BasicInformation({this.option, this.name, this.email, Key key})
+  const BasicInformation(
+      {this.option, this.fname, this.lname, this.email, Key key})
       : super(key: key);
 
   @override
@@ -92,7 +95,30 @@ class _BasicInformationState extends State<BasicInformation> {
                             end: Alignment.centerLeft),
                         borderRadius: BorderRadius.all(Radius.circular(
                             MediaQuery.of(context).size.width * 0.02))),
-                    child: Text(widget.name.toString(),
+                    child: Text(widget.fname.toString(),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.042))),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.03,
+                ),
+                Container(
+                    //padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.width * 0.04,
+                        bottom: MediaQuery.of(context).size.width * 0.04),
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
+                            begin: Alignment.centerRight,
+                            end: Alignment.centerLeft),
+                        borderRadius: BorderRadius.all(Radius.circular(
+                            MediaQuery.of(context).size.width * 0.02))),
+                    child: Text(widget.lname.toString(),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize:

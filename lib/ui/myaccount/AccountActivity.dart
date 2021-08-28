@@ -1,6 +1,7 @@
 import 'file:///E:/Azharuddin/flutter-projects/abaadengineering/lib/ui/home/home.dart';
 import 'file:///E:/Azharuddin/flutter-projects/abaadengineering/lib/ui/accounts/loginPage.dart';
 import 'package:abaadengineering/ui/myaccount/BasicInformation.dart';
+import 'package:abaadengineering/ui/myaccount/chat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:abaadengineering/styles/my_icons.dart';
@@ -118,7 +119,9 @@ class _AccountActivityState extends State<AccountActivity> {
 
   _listItemPressed(BuildContext context, int index) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var name = prefs.getString("name");
+    //var name = prefs.getString("name");
+    var fname = prefs.getString("fname");
+    var lname = prefs.getString("lname");
     var email = prefs.getString("email");
     if (options[index] == "Logout") {
       // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -135,9 +138,13 @@ class _AccountActivityState extends State<AccountActivity> {
           context,
           MaterialPageRoute(
               builder: (context) => BasicInformation(
-                  option: options[index], name: name, email: email)));
+                  option: options[index],
+                  fname: fname,
+                  lname: lname,
+                  email: email)));
     } else {
       debugPrint("${options[index]} pressed");
+      //Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
     }
   }
 }

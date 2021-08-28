@@ -31,7 +31,10 @@ class _MainPageState extends State<MainActivity> {
   ScrollController _controller = new ScrollController();
 
   String _userID = '';
-  String _name = '';
+  String _fname = '';
+
+  String _lname = '';
+  //String _name = '';
   String _email = '';
 
   @override
@@ -39,14 +42,16 @@ class _MainPageState extends State<MainActivity> {
     // TODO: implement initState
     super.initState();
     _getUserDetails();
-    debugPrint(_email + _name);
+    debugPrint(_email + _fname + _lname);
   }
 
   _getUserDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _userID = (prefs.getString('userid') ?? '');
-      _name = (prefs.getString('name') ?? '');
+      _fname = (prefs.getString('fname') ?? '');
+      _lname = (prefs.getString('lname') ?? '');
+      //_name = (prefs.getString('name') ?? '');
       _email = (prefs.getString('email') ?? '');
     });
   }
@@ -86,7 +91,7 @@ class _MainPageState extends State<MainActivity> {
                             Container(
                               margin: EdgeInsets.only(left: 0.0, top: 8.0),
                               child: Text(
-                                "${_name}",
+                                "${_fname + " " + _lname}",
                                 style: TextStyle(fontSize: 16.0),
                                 textAlign: TextAlign.start,
                               ),

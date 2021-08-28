@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:path/path.dart';
+//import 'package:date_format/date_format.dart';
 
 class PaymentMonthList extends StatefulWidget {
   final Projects project;
@@ -40,7 +42,7 @@ class _PaymentMonthListState extends State<PaymentMonthList> {
         selectedYear = "$currentYear";
       });
       mList.add("$currentYear");
-      for (var i = 1; i < 10; i++) {
+      for (var i = 1; i < 15; i++) {
         var year = currentYear - i;
         mList.add("$year");
         print("Year...$year");
@@ -160,7 +162,6 @@ class _PaymentMonthListState extends State<PaymentMonthList> {
           ),
           Expanded(
             //flex: 1,
-
             flex: 2,
             child: GridView.builder(
               padding: const EdgeInsets.only(left: 8.00, right: 8.00),
@@ -175,7 +176,7 @@ class _PaymentMonthListState extends State<PaymentMonthList> {
               itemBuilder: (context, int index) {
                 return InkWell(
                   onTap: () {
-                    showReport(arrMonths[index], index);
+                    showReport(context,arrMonths[index]["name"],arrMonths[index]["monthNumber"], index);
                   },
                   child: Container(
                     margin: EdgeInsets.only(
@@ -190,7 +191,7 @@ class _PaymentMonthListState extends State<PaymentMonthList> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5.0),
                           child: Text(
-                            arrMonths[index],
+                            arrMonths[index]["name"],
                             style: TextStyle(
                               color: Color(0XFF5A626F),
                               fontSize: 17.0,
@@ -204,39 +205,39 @@ class _PaymentMonthListState extends State<PaymentMonthList> {
               },
             ),
           ),
-          Expanded(
-              child: Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  print("Button click..");
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SummaryList()));
-                },
-                child: Container(
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.only(left: 15.0, right: 15.0),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      gradient: LinearGradient(
-                          colors: [Color(arrColor[3]), Color(arrColor[11])],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft),
-                    ),
-                    //height: 85,
-                    padding: EdgeInsets.all(
-                        MediaQuery.of(context).size.width * 0.04),
-                    child: Text(
-                      "Summary",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
-                          fontWeight: FontWeight.bold),
-                    )),
-              ),
-            ],
-          )),
+          // Expanded(
+          //     child: Column(
+          //   children: [
+          //     InkWell(
+          //       onTap: () {
+          //         print("Button click..");
+          //         Navigator.push(context,
+          //             MaterialPageRoute(builder: (context) => SummaryList()));
+          //       },
+          //       child: Container(
+          //           alignment: Alignment.center,
+          //           margin: const EdgeInsets.only(left: 15.0, right: 15.0),
+          //           width: MediaQuery.of(context).size.width,
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          //             gradient: LinearGradient(
+          //                 colors: [Color(arrColor[3]), Color(arrColor[11])],
+          //                 begin: Alignment.centerRight,
+          //                 end: Alignment.centerLeft),
+          //           ),
+          //           //height: 85,
+          //           padding: EdgeInsets.all(
+          //               MediaQuery.of(context).size.width * 0.04),
+          //           child: Text(
+          //             "Summary",
+          //             style: TextStyle(
+          //                 color: Colors.white,
+          //                 fontSize: MediaQuery.of(context).size.width * 0.04,
+          //                 fontWeight: FontWeight.bold),
+          //           )),
+          //     ),
+          //   ],
+          // )),
           //Text("Summary"),
           Stack(
             children: [
@@ -313,27 +314,33 @@ class _PaymentMonthListState extends State<PaymentMonthList> {
     0xFFC78FC0,
   ];
   var arrMonths = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    {"name": "January", "monthNumber": "01"},
+    {"name": "February", "monthNumber": "02"},
+    {"name": "March", "monthNumber": "03"},
+    {"name": "April", "monthNumber": "04"},
+    {"name": "May", "monthNumber": "05"},
+    {"name": "June", "monthNumber": "06"},
+    {"name": "July", "monthNumber": "07"},
+    {"name": "August", "monthNumber": "08"},
+    {"name": "September", "monthNumber": "09"},
+    {"name": "October", "monthNumber": "10"},
+    {"name": "November", "monthNumber": "11"},
+    {"name": "December", "monthNumber": "12"},
   ];
 
-  void showReport(String arrMonth, int index) {
+  void showReport(BuildContext context,String arrMonthName, String arrMonth, int index) {
+    // var now = DateTime.now();
+    // print("month..." + now.toString());
+    // final formatted = formatDate(now, [mm]);
+    //int current_mon = now.month;
+    print("month..." + arrMonth.toString());
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => PaymentsAndCollections(
           project: widget.project,
-          monthName: arrMonth,
+          monthName: arrMonthName,
+          monthNumber: arrMonth,
           year: selectedYear,
         ),
       ),

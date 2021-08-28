@@ -69,11 +69,13 @@ class _LoginPageState extends State<LoginPage> {
       if (responseData['status'] == "success") {
         // showCustomToast("" + responseData['status']);
         var jsonUserData = responseData['userdata'];
-
+        print("JSONUser...." + jsonUserData.toString());
         UserData userData = new UserData(
             true,
             jsonUserData['id'],
-            jsonUserData['name'],
+            jsonUserData['fname'],
+            jsonUserData['lname'],
+            //jsonUserData['name'],
             jsonUserData['email_id'],
             jsonUserData['phone_number'],
             jsonUserData['profile_picture'],

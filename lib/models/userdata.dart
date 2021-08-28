@@ -1,7 +1,9 @@
 class UserData {
   final bool isLoggedIn;
   final String id;
-  final String name;
+  //final String name;
+  final String fname;
+  final String lname;
   final String emailID;
   final String userPhone;
   final String profilePicture;
@@ -12,7 +14,9 @@ class UserData {
   UserData(
     this.isLoggedIn,
     this.id,
-    this.name,
+    //this.name,
+    this.fname,
+    this.lname,
     this.emailID,
     this.userPhone,
     this.profilePicture,

@@ -161,7 +161,7 @@ class _MonthlyReportScreenState extends State<MonthlyReportScreen> {
                     mListReport = snapshot.data;
                     return mListReport.length == 0
                         ? Container(
-                            color: Colors.white,
+                            //color: Colors.white,
                             child: Text("No projects added yet"),
                           )
                         : Padding(

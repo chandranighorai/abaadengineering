@@ -6,7 +6,11 @@ saveUserPrefs(UserData userData) async {
 
   preferences.setBool("isLoggedIn", true);
 
-  preferences.setString("name", userData.name.toString());
+  //preferences.setString("name", userData.name.toString());
+  preferences.setString("fname", userData.fname.toString());
+
+  preferences.setString("lname", userData.lname.toString());
+
   preferences.setString("userid", userData.id);
 
   preferences.setString("email", userData.emailID.toString());
