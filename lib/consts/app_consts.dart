@@ -11,4 +11,5 @@ class Consts {
   static String VIEW_ADMIN_DESIGNS = API_URL + "view_admin_documents";
   static String VIEW_MONTHLY_RFEPORTS = API_URL + "view_monthly_report";
   static String VIEW_SUMMERY_LIST = API_URL + "view_summery_report";
+  static String VIEW_MESSAGE = API_URL + "view_message";
 }

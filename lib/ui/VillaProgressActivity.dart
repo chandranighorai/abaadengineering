@@ -27,6 +27,7 @@ class _VillaProgressState extends State<VillaProgressActivity> {
               // padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
               itemCount: options.length,
               itemBuilder: (context, index) {
+                var expanded = Expanded;
                 return Card(
                     child: Row(children: [
                   // Expanded(
