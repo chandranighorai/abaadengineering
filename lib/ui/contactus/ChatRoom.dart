@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:abaadengineering/consts/app_consts.dart';
 import 'package:abaadengineering/styles/my_icons.dart';
+import 'package:abaadengineering/ui/contactus/ChatList.dart';
 import 'package:abaadengineering/ui/contactus/ChatModel.dart';
 import 'package:abaadengineering/util/alertdialog.dart';
 import 'package:flutter/material.dart';
@@ -18,17 +19,20 @@ class ChatRoom extends StatefulWidget {
 
 class _ChatRoomState extends State<ChatRoom> {
   Future<ChatModel> chatList;
+  String userId;
+  TextEditingController messageText;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     chatList = getChatList();
     print("ChatList..." + chatList.toString());
+    messageText = new TextEditingController();
   }
 
   Future<ChatModel> getChatList() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userId = (prefs.getString('userid') ?? '');
+    userId = (prefs.getString('userid') ?? '');
     print("userId..." + userId.toString());
     var requestParam = "from_id=" + userId + "&to_id=0";
     var ProjectUrl = Consts.VIEW_MESSAGE + "?" + requestParam;
@@ -43,6 +47,25 @@ class _ChatRoomState extends State<ChatRoom> {
       }
     } else {
       showCustomToast("Something went wrong");
+    }
+  }
+
+  _sendMessage(String messagesText) async {
+    print("MessagText..." + messageText.toString());
+    try {
+      var requestParams =
+          "from_id=" + userId + "&to_id=0" + "&message=" + messagesText;
+      var projectUrl = Consts.SEND_MESSAGE + "?" + requestParams;
+      print("responseData..." + projectUrl.toString());
+      var response = await http.get(Uri.parse(projectUrl));
+      var responseData = jsonDecode(response.body);
+      print("responseData..." + responseData.toString());
+      setState(() {
+        chatList = getChatList();
+        messageText.clear();
+      });
+    } on Exception catch (e) {
+      print(e.toString());
     }
   }
 
@@ -105,43 +128,17 @@ class _ChatRoomState extends State<ChatRoom> {
                         )
                       : ListView.builder(
                           padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.02,
-                              right: MediaQuery.of(context).size.width * 0.02),
+                            left: MediaQuery.of(context).size.width * 0.02,
+                            right: MediaQuery.of(context).size.width * 0.02,
+                            // top: MediaQuery.of(context).size.width * 0.00,
+                            // bottom: MediaQuery.of(context).size.width * 0.00,
+                          ),
+                          reverse: true,
+                          shrinkWrap: true,
                           itemCount: chatList.length,
                           itemBuilder: (context, int index) {
                             MessageList chatModel = chatList[index];
-                            return Container(
-                                padding: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width * 0.03),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                        padding: EdgeInsets.all(
-                                            MediaQuery.of(context).size.width *
-                                                0.03),
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.grey[100]),
-                                        child: Icon(
-                                          Icons.person,
-                                          color: Colors.grey,
-                                        )),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.02,
-                                    ),
-                                    Container(
-                                        padding: EdgeInsets.all(
-                                            MediaQuery.of(context).size.width *
-                                                0.03),
-                                        decoration: BoxDecoration(
-                                            color: Colors.amber[100],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(15))),
-                                        child:
-                                            Text(chatModel.message.toString())),
-                                  ],
-                                ));
+                            return ChatList(chatModel: chatModel);
                           });
                 } else {
                   return Center(
@@ -151,7 +148,7 @@ class _ChatRoomState extends State<ChatRoom> {
               },
             )),
             Container(
-              height: MediaQuery.of(context).size.height * 0.06,
+              height: MediaQuery.of(context).size.height * 0.08,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(
                   left: MediaQuery.of(context).size.width * 0.02,
@@ -162,14 +159,25 @@ class _ChatRoomState extends State<ChatRoom> {
                     width: MediaQuery.of(context).size.width / 1.2,
                     //color: Colors.red,
                     child: TextFormField(
+                      controller: messageText,
                       keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                         hintText: "Write message",
                       ),
+                      onChanged: (value) {
+                        print("val..." + value.toString());
+                      },
                     ),
                   ),
                   Spacer(),
-                  Icon(Icons.send)
+                  InkWell(
+                      onTap: () {
+                        if (messageText.text.length == 0) {
+                        } else {
+                          _sendMessage(messageText.text);
+                        }
+                      },
+                      child: Icon(Icons.send))
                 ],
               ),
             )

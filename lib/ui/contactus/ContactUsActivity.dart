@@ -6,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
 class ContactUsActivity extends StatefulWidget {
+  var userType;
+  ContactUsActivity({this.userType});
   @override
   _ContactUsActivityState createState() => _ContactUsActivityState();
 }
@@ -144,48 +146,45 @@ class _ContactUsActivityState extends State<ContactUsActivity> {
                   )
                 ])),
             SizedBox(height: 40.0),
-            Text(
-              "Or Let’s Have A Chat Here",
-              style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.indigo),
-            ),
-            SizedBox(height: 20.0),
-            InkWell(
-              onTap: () {
-                print("ChatRoom Clicked...");
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => ChatRoom()));
-              },
-              child: Container(
-                  margin: EdgeInsets.only(left: 100.0, right: 120.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    gradient: LinearGradient(
-                        colors: [Color(0xFF2196F3), Color(0xFF38068f)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft),
+            widget.userType == "Guest"
+                ? SizedBox()
+                : Text(
+                    "Or Let’s Have A Chat Here",
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.indigo),
                   ),
-                  child: Row(children: <Widget>[
-                    FlatButton.icon(
-                      onPressed: () {
-                        print("ChatRoom Clicked...");
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChatRoom()));
-                      },
-                      icon: Icon(Icons.chat_outlined, color: Colors.white),
-                      label: Text("CHAT ROOM",
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: Colors.white,
-                          )),
-                      padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
-                    )
-                  ])),
-            ),
+            SizedBox(height: 20.0),
+            widget.userType == "Guest"
+                ? SizedBox()
+                : Container(
+                    margin: EdgeInsets.only(left: 100.0, right: 120.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      gradient: LinearGradient(
+                          colors: [Color(0xFF2196F3), Color(0xFF38068f)],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft),
+                    ),
+                    child: Row(children: <Widget>[
+                      FlatButton.icon(
+                        onPressed: () {
+                          print("ChatRoom Clicked...");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatRoom()));
+                        },
+                        icon: Icon(Icons.chat_outlined, color: Colors.white),
+                        label: Text("CHAT ROOM",
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.white,
+                            )),
+                        padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                      )
+                    ])),
           ],
         )
       ])),

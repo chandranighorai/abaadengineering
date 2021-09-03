@@ -88,7 +88,8 @@ class _GuestHomePageState extends State<GuestHomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ContactUsActivity(),
+                        builder: (context) =>
+                            ContactUsActivity(userType: "Guest"),
                       ),
                     );
                   },
