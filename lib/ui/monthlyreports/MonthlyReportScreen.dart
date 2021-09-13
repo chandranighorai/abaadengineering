@@ -162,7 +162,7 @@ class _MonthlyReportScreenState extends State<MonthlyReportScreen> {
                     return mListReport.length == 0
                         ? Container(
                             //color: Colors.white,
-                            child: Text("No projects added yet"),
+                            child: Center(child: Text("No projects added yet")),
                           )
                         : Padding(
                             padding: const EdgeInsets.all(8.0),

@@ -38,7 +38,8 @@ class ApprovedDrawingsList {
   String modificationDate;
   String addDate;
   String propertyTitle;
-  String name;
+  String fname;
+  String lname;
 
   ApprovedDrawingsList(
       {this.drawingID,
@@ -50,7 +51,8 @@ class ApprovedDrawingsList {
       this.modificationDate,
       this.addDate,
       this.propertyTitle,
-      this.name});
+      this.fname,
+      this.lname});
 
   ApprovedDrawingsList.fromJson(Map<String, dynamic> json) {
     drawingID = json['drawing_ID'];
@@ -62,7 +64,8 @@ class ApprovedDrawingsList {
     modificationDate = json['modification_date'];
     addDate = json['add_date'];
     propertyTitle = json['property_title'];
-    name = json['name'];
+    fname = json['fname'];
+    lname = json['lname'];
   }
 
   Map<String, dynamic> toJson() {
@@ -76,7 +79,8 @@ class ApprovedDrawingsList {
     data['modification_date'] = this.modificationDate;
     data['add_date'] = this.addDate;
     data['property_title'] = this.propertyTitle;
-    data['name'] = this.name;
+    data['fname'] = this.fname;
+    data['lname'] = this.lname;
     return data;
   }
 }
