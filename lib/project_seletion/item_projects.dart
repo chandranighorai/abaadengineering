@@ -14,7 +14,8 @@ class _ItemProjectsState extends State<ItemProjects> {
   @override
   Widget build(BuildContext context) {
     Projects project = widget.projects;
-    print("Project..." + project.featuredImage.toString());
+    // print("Project..." + project.toString());
+    // print("Project..." + project.featuredImage.toString());
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
       child: InkWell(
