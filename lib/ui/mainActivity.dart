@@ -16,6 +16,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:abaadengineering/styles/my_icons.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainActivity extends StatefulWidget {
   final Projects projects;
@@ -199,14 +200,14 @@ class _MainPageState extends State<MainActivity> {
                               matchTextDirection: false,
                               height: 150.0,
                               width: 150.0),
-
-                          // onTap: (){
-                          //                                      //   Navigator.push(
-                          //                                      //     context,
-                          //                                      //     MaterialPageRoute(builder: (context) => VillaLocation()),
-                          //                                      //   );
-                          //                                      //
-                          //                                      // },
+                          onTap: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => VillaLocation()),
+                            // );
+                            _launchUrl(project.mapLink);
+                          },
                         ),
                         GestureDetector(
                           child: SvgPicture.asset(iconPayments_n_collection,
@@ -347,4 +348,11 @@ class _MainPageState extends State<MainActivity> {
     "assets/parrot.jpg",
     "assets/road.jpg",
   ];
+
+  _launchUrl(String mapLink) async {
+    print("button click..." + mapLink.toString());
+    // var url =
+    //     "https://www.google.com/maps/place/S.D.F./@22.5691124,88.4287278,17z/data=!3m1!4b1!4m5!3m4!1s0x3a0275adfab28d3f:0xa6158f942cea5e42!8m2!3d22.5691124!4d88.4309165";
+    await launch(mapLink);
+  }
 }

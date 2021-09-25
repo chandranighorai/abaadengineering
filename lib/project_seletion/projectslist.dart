@@ -35,6 +35,7 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
     print("userId..." + userId.toString());
     var projectRequestParam = "user_id=" + userId;
     var PROJECT_URL = Consts.GET_PROJECT_LIST + "?" + projectRequestParam;
+    print("project_url..." + PROJECT_URL.toString());
     final response = await http.get(Uri.parse(PROJECT_URL));
     print("Status code ${response.body}");
     if (response.statusCode == 200) {

@@ -41,6 +41,7 @@ class Projects {
   String country;
   String zip;
   String featuredImage;
+  String mapLink;
   String status;
   String modificationDate;
   String addDate;
@@ -60,6 +61,7 @@ class Projects {
       this.country,
       this.zip,
       this.featuredImage,
+      this.mapLink,
       this.status,
       this.modificationDate,
       this.addDate,
@@ -79,6 +81,7 @@ class Projects {
     country = json['country'];
     zip = json['zip'];
     featuredImage = json['featured_image'];
+    mapLink = json['map_link'];
     status = json['status'];
     modificationDate = json['modification_date'];
     addDate = json['add_date'];
@@ -100,6 +103,7 @@ class Projects {
     data['country'] = this.country;
     data['zip'] = this.zip;
     data['featured_image'] = this.featuredImage;
+    data['map_link'] = this.mapLink;
     data['status'] = this.status;
     data['modification_date'] = this.modificationDate;
     data['add_date'] = this.addDate;
