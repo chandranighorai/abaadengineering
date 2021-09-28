@@ -13,4 +13,8 @@ class Consts {
   static String VIEW_SUMMERY_LIST = API_URL + "view_summery_report";
   static String VIEW_MESSAGE = API_URL + "view_message";
   static String SEND_MESSAGE = API_URL + "send_message";
+  static String SOME_OF_OUR_DESIGN = API_URL + "view_design";
+  static String VIEW_PREVIOUS_WORK = API_URL + "view_previous_work";
+  static String FEEDBACK_LIST = API_URL + "testimonial_list";
+  static String CONSULTANT_PROFILE = API_URL + "consultant_profile";
 }

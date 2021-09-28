@@ -1,5 +1,12 @@
-import 'package:abaadengineering/ui/PreviousWork.dart';
+import 'dart:convert';
+
+import 'package:abaadengineering/consts/app_consts.dart';
 import 'package:abaadengineering/ui/ProfileNVision.dart';
+import 'package:abaadengineering/ui/consultant_profile/ConsultantModel.dart';
+
+import 'package:abaadengineering/ui/consultant_profile/customerFeedback/CustomerFeedback.dart';
+import 'package:abaadengineering/ui/consultant_profile/previousWork/PreviousWork.dart';
+import 'package:abaadengineering/ui/consultant_profile/someOfOurDesign/SomeOfDesign.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:abaadengineering/styles/my_icons.dart';
@@ -7,8 +14,9 @@ import 'package:abaadengineering/styles/my_icons.dart';
 // import 'package:abaadengineering/ui/ProfileAdnVision.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
-
+import 'package:http/http.dart' as http;
 import '../contactus/ContactUsActivity.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ConsultantProfile extends StatefulWidget {
   @override
@@ -16,6 +24,15 @@ class ConsultantProfile extends StatefulWidget {
 }
 
 class _ConsultantProfileState extends State<ConsultantProfile> {
+  Future<ConsultantModel> _constantData;
+  var responseData;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _constantData = _getConsultant();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,11 +123,11 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
                     padding: EdgeInsets.all(18.0),
                     child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PreviousWork()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => SomeOfDesign()),
+                          // );
                         },
                         child: Row(children: <Widget>[
                           Container(
@@ -137,26 +154,25 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
                 child: Container(
                     padding: EdgeInsets.all(18.0),
                     child: GestureDetector(
-
-                        // onTap: (){
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (context) => PreviousWork()),
-                        //   );
-                        //
-                        // },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PreviousWork()),
+                          );
+                        },
                         child: Row(children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: SvgPicture.asset(iconWork),
-                      ),
-                      Text("View Previous Work Done",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
-                            // fontWeight: FontWeight.bold
-                          )),
-                    ])))),
+                          Container(
+                            padding: EdgeInsets.only(right: 10.0),
+                            child: SvgPicture.asset(iconWork),
+                          ),
+                          Text("View Previous Work Done",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                                // fontWeight: FontWeight.bold
+                              )),
+                        ])))),
             SizedBox(height: 10.0),
             Container(
                 margin: EdgeInsets.only(left: 15.0, right: 15.0),
@@ -170,26 +186,25 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
                 child: Container(
                     padding: EdgeInsets.all(15.0),
                     child: GestureDetector(
-
-                        // onTap: (){
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (context) => PreviousWork()),
-                        //   );
-                        //
-                        // },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CustomerFeedback()),
+                          );
+                        },
                         child: Row(children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: SvgPicture.asset(iconFeedback),
-                      ),
-                      Text("Our Valued Customers Feedback",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
-                            // fontWeight: FontWeight.bold
-                          )),
-                    ])))),
+                          Container(
+                            padding: EdgeInsets.only(right: 10.0),
+                            child: SvgPicture.asset(iconFeedback),
+                          ),
+                          Text("Our Valued Customers Feedback",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                                // fontWeight: FontWeight.bold
+                              )),
+                        ])))),
             SizedBox(height: 10.0),
             Container(
                 margin: EdgeInsets.only(left: 15.0, right: 15.0),
@@ -235,26 +250,23 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
                 child: Container(
                     padding: EdgeInsets.all(18.0),
                     child: GestureDetector(
-
-                        // onTap: (){
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (context) => PreviousWork()),
-                        //   );
-                        //
-                        // },
+                        onTap: () {
+                          _viewOurLocation(responseData["consultant_profile"][0]
+                                  ["map_link"]
+                              .toString());
+                        },
                         child: Row(children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: SvgPicture.asset(iconMarker),
-                      ),
-                      Text("View Our Location",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
-                            // fontWeight: FontWeight.bold
-                          )),
-                    ])))),
+                          Container(
+                            padding: EdgeInsets.only(right: 10.0),
+                            child: SvgPicture.asset(iconMarker),
+                          ),
+                          Text("View Our Location",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.white,
+                                // fontWeight: FontWeight.bold
+                              )),
+                        ])))),
           ],
         )
       ])),
@@ -266,4 +278,19 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
     "Office Payments",
     "Collections"
   ];
+
+  Future<ConsultantModel> _getConsultant() async {
+    try {
+      var response = await http.get(Uri.parse(Consts.CONSULTANT_PROFILE));
+      responseData = jsonDecode(response.body);
+      return ConsultantModel.fromJson(responseData);
+    } on Exception catch (e) {
+      print(e.toString());
+      print("No Network");
+    }
+  }
+
+  _viewOurLocation(String _mapLink) async {
+    await launch(_mapLink);
+  }
 }

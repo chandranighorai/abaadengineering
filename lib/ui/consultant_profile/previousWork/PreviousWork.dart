@@ -1,8 +1,14 @@
+import 'dart:convert';
+
+import 'package:abaadengineering/consts/app_consts.dart';
+import 'package:abaadengineering/ui/consultant_profile/previousWork/PreviousWorkList.dart';
+import 'package:abaadengineering/ui/consultant_profile/previousWork/PreviousWorkModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:abaadengineering/styles/my_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:http/http.dart' as http;
 
 class PreviousWork extends StatefulWidget {
   @override
@@ -10,6 +16,14 @@ class PreviousWork extends StatefulWidget {
 }
 
 class _PreviousWorkState extends State<PreviousWork> {
+  Future<PreviousWorkModel> _previousWork;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _previousWork = _getPreviousWork();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,13 +74,33 @@ class _PreviousWorkState extends State<PreviousWork> {
           Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 114.0,
-
               //  color: Colors.grey,
-              child: ListView.builder(
-                // padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                itemCount: options.length,
-                itemBuilder: (context, index) {
-                  return Image.asset(options[index]);
+              child: FutureBuilder(
+                initialData: null,
+                future: _previousWork,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    var workList = snapshot.data.previousWorkList;
+                    return workList.length == 0
+                        ? Center(
+                            child: Text("No Data"),
+                          )
+                        : ListView.builder(
+                            // padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                            padding: EdgeInsets.all(0),
+                            itemCount: workList.length,
+                            itemBuilder: (context, index) {
+                              PreviousWorkList previousWorkList =
+                                  workList[index];
+                              return PreviousWorkModelList(
+                                  workList: previousWorkList);
+                            },
+                          );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
                 },
               ))
         ]),
@@ -121,4 +155,15 @@ class _PreviousWorkState extends State<PreviousWork> {
     "images/img_43.jpg",
     "images/img_44.jpg",
   ];
+
+  Future<PreviousWorkModel> _getPreviousWork() async {
+    try {
+      var response = await http.get(Uri.parse(Consts.VIEW_PREVIOUS_WORK));
+      var responseData = jsonDecode(response.body);
+      return PreviousWorkModel.fromJson(responseData);
+    } on Exception catch (e) {
+      print(e.toString());
+      print("Network error");
+    }
+  }
 }
