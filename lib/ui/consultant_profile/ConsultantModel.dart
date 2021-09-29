@@ -1,34 +1,34 @@
-class ConsultantModel {
-  String status;
-  String message;
-  List<ConsultantProfile> consultantProfile;
+// class ConsultantModel {
+//   String status;
+//   String message;
+//   List<ConsultantProfileList> consultantProfile;
 
-  ConsultantModel({this.status, this.message, this.consultantProfile});
+//   ConsultantModel({this.status, this.message, this.consultantProfile});
 
-  ConsultantModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    if (json['consultant_profile'] != null) {
-      consultantProfile = new List<ConsultantProfile>();
-      json['consultant_profile'].forEach((v) {
-        consultantProfile.add(new ConsultantProfile.fromJson(v));
-      });
-    }
-  }
+//   ConsultantModel.fromJson(Map<String, dynamic> json) {
+//     status = json['status'];
+//     message = json['message'];
+//     if (json['consultant_profile'] != null) {
+//       consultantProfile = new List<ConsultantProfileList>();
+//       json['consultant_profile'].forEach((v) {
+//         consultantProfile.add(new ConsultantProfileList.fromJson(v));
+//       });
+//     }
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
-    if (this.consultantProfile != null) {
-      data['consultant_profile'] =
-          this.consultantProfile.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['status'] = this.status;
+//     data['message'] = this.message;
+//     if (this.consultantProfile != null) {
+//       data['consultant_profile'] =
+//           this.consultantProfile.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
-class ConsultantProfile {
+class ConsultantProfileList {
   String id;
   String consultantName;
   String consultantSlug;
@@ -41,7 +41,7 @@ class ConsultantProfile {
   String mapLink;
   String modificationDate;
 
-  ConsultantProfile(
+  ConsultantProfileList(
       {this.id,
       this.consultantName,
       this.consultantSlug,
@@ -54,33 +54,33 @@ class ConsultantProfile {
       this.mapLink,
       this.modificationDate});
 
-  ConsultantProfile.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    consultantName = json['consultant_name'];
-    consultantSlug = json['consultant_slug'];
-    description = json['description'];
-    emailId = json['email_id'];
-    address = json['address'];
-    phoneNumber = json['phone_number'];
-    instagramId = json['instagram_id'];
-    whatsappNumber = json['whatsapp_number'];
-    mapLink = json['map_link'];
-    modificationDate = json['modification_date'];
-  }
+  // ConsultantProfileList.fromJson(Map<String, dynamic> json) {
+  //   id = json['id'];
+  //   consultantName = json['consultant_name'];
+  //   consultantSlug = json['consultant_slug'];
+  //   description = json['description'];
+  //   emailId = json['email_id'];
+  //   address = json['address'];
+  //   phoneNumber = json['phone_number'];
+  //   instagramId = json['instagram_id'];
+  //   whatsappNumber = json['whatsapp_number'];
+  //   mapLink = json['map_link'];
+  //   modificationDate = json['modification_date'];
+  // }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['consultant_name'] = this.consultantName;
-    data['consultant_slug'] = this.consultantSlug;
-    data['description'] = this.description;
-    data['email_id'] = this.emailId;
-    data['address'] = this.address;
-    data['phone_number'] = this.phoneNumber;
-    data['instagram_id'] = this.instagramId;
-    data['whatsapp_number'] = this.whatsappNumber;
-    data['map_link'] = this.mapLink;
-    data['modification_date'] = this.modificationDate;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['id'] = this.id;
+  //   data['consultant_name'] = this.consultantName;
+  //   data['consultant_slug'] = this.consultantSlug;
+  //   data['description'] = this.description;
+  //   data['email_id'] = this.emailId;
+  //   data['address'] = this.address;
+  //   data['phone_number'] = this.phoneNumber;
+  //   data['instagram_id'] = this.instagramId;
+  //   data['whatsapp_number'] = this.whatsappNumber;
+  //   data['map_link'] = this.mapLink;
+  //   data['modification_date'] = this.modificationDate;
+  //   return data;
+  // }
 }

@@ -24,8 +24,9 @@ class ConsultantProfile extends StatefulWidget {
 }
 
 class _ConsultantProfileState extends State<ConsultantProfile> {
-  Future<ConsultantModel> _constantData;
+  Future<ConsultantProfileList> _constantData;
   var responseData;
+  var profileDataList = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -94,7 +95,8 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfileNVision()),
+                                builder: (context) => ProfileNVision(
+                                    profileData: profileDataList)),
                           );
                         },
                         child: Row(children: <Widget>[
@@ -123,11 +125,11 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
                     padding: EdgeInsets.all(18.0),
                     child: GestureDetector(
                         onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => SomeOfDesign()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SomeOfDesign()),
+                          );
                         },
                         child: Row(children: <Widget>[
                           Container(
@@ -279,11 +281,26 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
     "Collections"
   ];
 
-  Future<ConsultantModel> _getConsultant() async {
+  Future<ConsultantProfileList> _getConsultant() async {
     try {
       var response = await http.get(Uri.parse(Consts.CONSULTANT_PROFILE));
       responseData = jsonDecode(response.body);
-      return ConsultantModel.fromJson(responseData);
+      if (responseData["status"] == "success") {
+        var consultantProfile = responseData["consultant_profile"];
+        for (int i = 0; i < consultantProfile.length; i++) {
+          ConsultantProfileList profileData = new ConsultantProfileList();
+          profileData.consultantName = consultantProfile[i]["consultant_name"];
+          profileData.description = consultantProfile[i]["description"];
+          profileData.emailId = consultantProfile[i]["email_id"];
+          profileData.address = consultantProfile[i]["address"];
+          profileData.phoneNumber = consultantProfile[i]["phone_number"];
+          profileData.instagramId = consultantProfile[i]["instagram_id"];
+          profileData.whatsappNumber = consultantProfile[i]["whatsapp_number"];
+          profileDataList.add(profileData);
+        }
+        print("profiledata..." + profileDataList.toString());
+      }
+      //return ConsultantModel.fromJson(responseData);
     } on Exception catch (e) {
       print(e.toString());
       print("No Network");

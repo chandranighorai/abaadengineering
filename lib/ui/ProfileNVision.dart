@@ -1,10 +1,15 @@
+import 'package:abaadengineering/ui/VisionProfileList.dart';
+import 'package:abaadengineering/ui/consultant_profile/ConsultantModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:abaadengineering/styles/my_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
+
 class ProfileNVision extends StatefulWidget {
+  var profileData;
+  ProfileNVision({this.profileData});
   @override
   _ProfileNVisionState createState() => _ProfileNVisionState();
 }
@@ -12,6 +17,9 @@ class ProfileNVision extends StatefulWidget {
 class _ProfileNVisionState extends State<ProfileNVision> {
   @override
   Widget build(BuildContext context) {
+    print("ProfileData..." + widget.profileData.toString());
+    //print("ProfileData..." + widget.profileData[0].toString());
+
     return Scaffold(
       body: Container(
         child: Column(children: <Widget>[
@@ -31,7 +39,7 @@ class _ProfileNVisionState extends State<ProfileNVision> {
                   child: Row(children: <Widget>[
                     FlatButton(
                       child: Text(
-                        'Previous Work \nDone',
+                        'Profile and \nVision',
                         style: TextStyle(fontSize: 20.0, color: Colors.white),
                       ),
 
@@ -60,13 +68,17 @@ class _ProfileNVisionState extends State<ProfileNVision> {
           Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 114.0,
-
               //  color: Colors.grey,
               child: ListView.builder(
                 // padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                itemCount: options.length,
+                itemCount: widget.profileData.length,
                 itemBuilder: (context, index) {
-                  return Image.asset(options[index]);
+                  ConsultantProfileList consultantProfile =
+                      widget.profileData[index];
+                  return VisionProfileList(
+                    visionList: consultantProfile
+                  );
+                  
                 },
               ))
         ]),
@@ -74,51 +86,53 @@ class _ProfileNVisionState extends State<ProfileNVision> {
     );
   }
 
-  final options = [
-    "images/img_1.jpg",
-    "images/img_1.jpg",
-    "images/img_2.jpg",
-    "images/img_3.jpg",
-    "images/img_4.jpg",
-    "images/img_5.jpg",
-    "images/img_6.jpg",
-    "images/img_7.jpg",
-    "images/img_8.jpg",
-    "images/img_9.jpg",
-    "images/img_10.jpg",
-    "images/img_11.jpg",
-    "images/img_12.jpg",
-    "images/img_13.jpg",
-    "images/img_14.jpg",
-    "images/img_15.jpg",
-    "images/img_16.jpg",
-    "images/img_17.jpg",
-    "images/img_18.jpg",
-    "images/img_19.jpg",
-    "images/img_20.jpg",
-    "images/img_21.jpg",
-    "images/img_22.jpg",
-    "images/img_23.jpg",
-    "images/img_24.jpg",
-    "images/img_25.jpg",
-    "images/img_26.jpg",
-    "images/img_27.jpg",
-    "images/img_28.jpg",
-    "images/img_29.jpg",
-    "images/img_30.jpg",
-    "images/img_31.jpg",
-    "images/img_32.jpg",
-    "images/img_33.jpg",
-    "images/img_34.jpg",
-    "images/img_35.jpg",
-    "images/img_36.jpg",
-    "images/img_37.jpg",
-    "images/img_38.jpg",
-    "images/img_39.jpg",
-    "images/img_40.jpg",
-    "images/img_41.jpg",
-    "images/img_42.jpg",
-    "images/img_43.jpg",
-    "images/img_44.jpg",
-  ];
+  // final options = [
+  //   "images/img_1.jpg",
+  //   "images/img_1.jpg",
+  //   "images/img_2.jpg",
+  //   "images/img_3.jpg",
+  //   "images/img_4.jpg",
+  //   "images/img_5.jpg",
+  //   "images/img_6.jpg",
+  //   "images/img_7.jpg",
+  //   "images/img_8.jpg",
+  //   "images/img_9.jpg",
+  //   "images/img_10.jpg",
+  //   "images/img_11.jpg",
+  //   "images/img_12.jpg",
+  //   "images/img_13.jpg",
+  //   "images/img_14.jpg",
+  //   "images/img_15.jpg",
+  //   "images/img_16.jpg",
+  //   "images/img_17.jpg",
+  //   "images/img_18.jpg",
+  //   "images/img_19.jpg",
+  //   "images/img_20.jpg",
+  //   "images/img_21.jpg",
+  //   "images/img_22.jpg",
+  //   "images/img_23.jpg",
+  //   "images/img_24.jpg",
+  //   "images/img_25.jpg",
+  //   "images/img_26.jpg",
+  //   "images/img_27.jpg",
+  //   "images/img_28.jpg",
+  //   "images/img_29.jpg",
+  //   "images/img_30.jpg",
+  //   "images/img_31.jpg",
+  //   "images/img_32.jpg",
+  //   "images/img_33.jpg",
+  //   "images/img_34.jpg",
+  //   "images/img_35.jpg",
+  //   "images/img_36.jpg",
+  //   "images/img_37.jpg",
+  //   "images/img_38.jpg",
+  //   "images/img_39.jpg",
+  //   "images/img_40.jpg",
+  //   "images/img_41.jpg",
+  //   "images/img_42.jpg",
+  //   "images/img_43.jpg",
+  //   "images/img_44.jpg",
+  // ];
+
+  
 }
