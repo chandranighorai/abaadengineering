@@ -28,6 +28,7 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
   int _selectedIndex = 0;
 
   Future<ProjectsModel> mListprojects;
+  var serverStatus;
 
   Future<ProjectsModel> _getProjects() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -40,7 +41,9 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
     print("Status code ${response.body}");
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body);
-      var serverStatus = responseData['status'];
+      setState(() {
+        serverStatus = responseData['status'];
+      });
       if (serverStatus == "success") {
         return ProjectsModel.fromJson(responseData);
       } else {
@@ -56,6 +59,11 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
     // TODO: implement initState
     super.initState();
     mListprojects = _getProjects();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   DateTime currentBackPressTime;
@@ -132,35 +140,41 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
                 ],
               ),
               Expanded(
-                child: FutureBuilder(
-                  initialData: null,
-                  future: mListprojects,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      var listProjects = snapshot.data.projectLists;
-                      print("ListProjects..." + listProjects.toString());
-                      return listProjects.length == 0
-                          ? Container(
-                              color: Colors.white,
-                              child: Text("No projects added yet"),
-                            )
-                          : ListView.builder(
-                              padding: EdgeInsets.all(0),
-                              //itemCount: 12,
-                              itemCount: listProjects.length,
-                              itemBuilder: (context, int index) {
-                                Projects projects = listProjects[index];
-                                return ItemProjects(
-                                  projects: projects,
-                                );
-                              });
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
+                child: serverStatus.toString() == "failed"
+                    ? Center(
+                        child: Text("No Data"),
+                      )
+                    : FutureBuilder(
+                        initialData: null,
+                        future: mListprojects,
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            var listProjects = snapshot.data.projectLists;
+                            print("ListProjects..." + listProjects.toString());
+                            return listProjects.length == 0
+                                ? Container(
+                                    color: Colors.white,
+                                    child: Text("No projects added yet"),
+                                  )
+                                : ListView.builder(
+                                    padding: EdgeInsets.all(0),
+                                    //itemCount: 12,
+                                    itemCount: listProjects.length,
+                                    itemBuilder: (context, int index) {
+                                      Projects projects = listProjects[index];
+                                      return ItemProjects(
+                                        projects: projects,
+                                      );
+                                    });
+                          } else {
+                            print("sfsdfsfs...." + snapshot.hasData.toString());
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
               ),
               //Spacer(),
               Stack(

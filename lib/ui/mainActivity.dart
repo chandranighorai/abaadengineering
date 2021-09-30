@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:abaadengineering/consts/app_consts.dart';
 import 'package:abaadengineering/models/projects_model.dart';
+import 'package:abaadengineering/ui/consultant_profile/ConsultantModel.dart';
 import 'package:abaadengineering/ui/myaccount/AccountActivity.dart';
 import 'package:abaadengineering/ui/payment_collections/PaymentMonthList.dart';
 import 'file:///E:/Azharuddin/flutter-projects/abaadengineering/lib/ui/monthlyreports/MonthsList.dart';
@@ -17,6 +21,7 @@ import 'package:abaadengineering/styles/my_icons.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class MainActivity extends StatefulWidget {
   final Projects projects;
@@ -37,6 +42,8 @@ class _MainPageState extends State<MainActivity> {
   String _lname = '';
   //String _name = '';
   String _email = '';
+  var responseData;
+  var profileDataList = [];
 
   @override
   void initState() {
@@ -44,6 +51,12 @@ class _MainPageState extends State<MainActivity> {
     super.initState();
     _getUserDetails();
     debugPrint(_email + _fname + _lname);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   _getUserDetails() async {
@@ -55,6 +68,23 @@ class _MainPageState extends State<MainActivity> {
       //_name = (prefs.getString('name') ?? '');
       _email = (prefs.getString('email') ?? '');
     });
+    var response = await http.get(Uri.parse(Consts.CONSULTANT_PROFILE));
+    responseData = jsonDecode(response.body);
+    if (responseData["status"] == "success") {
+      var consultantProfile = responseData["consultant_profile"];
+      for (int i = 0; i < consultantProfile.length; i++) {
+        ConsultantProfileList profileData = new ConsultantProfileList();
+        profileData.consultantName = consultantProfile[i]["consultant_name"];
+        profileData.description = consultantProfile[i]["description"];
+        profileData.emailId = consultantProfile[i]["email_id"];
+        profileData.address = consultantProfile[i]["address"];
+        profileData.phoneNumber = consultantProfile[i]["phone_number"];
+        profileData.instagramId = consultantProfile[i]["instagram_id"];
+        profileData.whatsappNumber = consultantProfile[i]["whatsapp_number"];
+        profileDataList.add(profileData);
+      }
+      print("profiledata..." + profileDataList.toString());
+    }
   }
 
   @override
@@ -236,7 +266,9 @@ class _MainPageState extends State<MainActivity> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ContactUsActivity(),
+                                builder: (context) => ContactUsActivity(
+                                    //userType: "Customer",
+                                    profileData: profileDataList),
                               ),
                             );
                           },
@@ -338,16 +370,16 @@ class _MainPageState extends State<MainActivity> {
     );
   }
 
-  List<String> images = [
-    "assets/flowers.jpg",
-    "assets/nature.jpg",
-    "assets/parrot.jpg",
-    "assets/road.jpg",
-    "assets/flowers.jpg",
-    "assets/nature.jpg",
-    "assets/parrot.jpg",
-    "assets/road.jpg",
-  ];
+  // List<String> images = [
+  //   "assets/flowers.jpg",
+  //   "assets/nature.jpg",
+  //   "assets/parrot.jpg",
+  //   "assets/road.jpg",
+  //   "assets/flowers.jpg",
+  //   "assets/nature.jpg",
+  //   "assets/parrot.jpg",
+  //   "assets/road.jpg",
+  // ];
 
   _launchUrl(String mapLink) async {
     print("button click..." + mapLink.toString());

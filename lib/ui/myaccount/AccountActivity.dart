@@ -1,6 +1,9 @@
 import 'file:///E:/Azharuddin/flutter-projects/abaadengineering/lib/ui/home/home.dart';
 import 'file:///E:/Azharuddin/flutter-projects/abaadengineering/lib/ui/accounts/loginPage.dart';
 import 'package:abaadengineering/ui/myaccount/BasicInformation.dart';
+import 'package:abaadengineering/ui/myaccount/ChangePassword.dart';
+import 'package:abaadengineering/ui/myaccount/Feedback.dart';
+import 'package:abaadengineering/ui/myaccount/LegalInformation.dart';
 import 'package:abaadengineering/ui/myaccount/chat.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +114,7 @@ class _AccountActivityState extends State<AccountActivity> {
   final options = [
     "Basic Information",
     "Change Password",
-    "Settings",
+    //"Settings",
     "Legal Information",
     "Send Feedback",
     "Logout"
@@ -123,16 +126,23 @@ class _AccountActivityState extends State<AccountActivity> {
     var fname = prefs.getString("fname");
     var lname = prefs.getString("lname");
     var email = prefs.getString("email");
+    var userId = prefs.getString("userid");
     if (options[index] == "Logout") {
       // SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs?.clear();
       Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ScaffoldExample(),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => ScaffoldExample(),
+      //   ),
+      // );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ScaffoldExample(),
+          ),
+          (route) => false);
     } else if (options[index] == "Basic Information") {
       Navigator.push(
           context,
@@ -142,9 +152,25 @@ class _AccountActivityState extends State<AccountActivity> {
                   fname: fname,
                   lname: lname,
                   email: email)));
+    } else if (options[index] == "Legal Information") {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => LegalInformation(
+                    option: options[index],
+                  )));
+    } else if (options[index] == "Send Feedback") {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => FeedBack(option: options[index])));
     } else {
       debugPrint("${options[index]} pressed");
-      //Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  ChangePassword(option: options[index], userId: userId)));
     }
   }
 }

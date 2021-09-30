@@ -8,6 +8,18 @@ class Forgotpassword extends StatefulWidget {
 
 class _ForgotpasswordState extends State<Forgotpassword> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
@@ -30,7 +42,10 @@ class _ForgotpasswordState extends State<Forgotpassword> {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
               ),
-              onChanged: (value) => {setState(() {})},
+              onChanged: (value) {
+                setState(() {});
+                print("Value..." + value.toString());
+              },
             ),
           ),
           Padding(

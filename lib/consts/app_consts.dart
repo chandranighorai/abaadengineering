@@ -17,4 +17,8 @@ class Consts {
   static String VIEW_PREVIOUS_WORK = API_URL + "view_previous_work";
   static String FEEDBACK_LIST = API_URL + "testimonial_list";
   static String CONSULTANT_PROFILE = API_URL + "consultant_profile";
+  static String LEGAL_INFORMATION = API_URL + "legal_information";
+  static String SEND_FEEDBACK = API_URL + "sendfeedback";
+  static String CHANGE_PASSWORD = API_URL + "user_change_password";
+  static String FORGOT_PASSWORD = API_URL + "forget_password";
 }

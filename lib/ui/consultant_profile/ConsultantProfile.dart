@@ -19,6 +19,8 @@ import '../contactus/ContactUsActivity.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ConsultantProfile extends StatefulWidget {
+  // final String userType;
+  // ConsultantProfile({this.userType});
   @override
   _ConsultantProfileState createState() => _ConsultantProfileState();
 }
@@ -32,6 +34,12 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
     // TODO: implement initState
     super.initState();
     _constantData = _getConsultant();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -224,7 +232,9 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ContactUsActivity()),
+                                builder: (context) => ContactUsActivity(
+                                    //userType: "Customer",
+                                    profileData: profileDataList)),
                           );
                         },
                         child: Row(children: <Widget>[

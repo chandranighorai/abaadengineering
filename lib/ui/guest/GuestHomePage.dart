@@ -1,9 +1,14 @@
+import 'dart:convert';
+
+import 'package:abaadengineering/consts/app_consts.dart';
 import 'package:abaadengineering/styles/my_icons.dart';
+import 'package:abaadengineering/ui/consultant_profile/ConsultantModel.dart';
 import 'package:abaadengineering/ui/consultant_profile/ConsultantProfile.dart';
 import 'package:abaadengineering/ui/contactus/ContactUsActivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:http/http.dart' as http;
 
 class GuestHomePage extends StatefulWidget {
   const GuestHomePage({Key key}) : super(key: key);
@@ -14,6 +19,21 @@ class GuestHomePage extends StatefulWidget {
 
 class _GuestHomePageState extends State<GuestHomePage> {
   ScrollController _controller = new ScrollController();
+  var responseData;
+  var profileDataList = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getUserDetails();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,8 +108,8 @@ class _GuestHomePageState extends State<GuestHomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            ContactUsActivity(userType: "Guest"),
+                        builder: (context) => ContactUsActivity(
+                            userType: "Guest", profileData: profileDataList),
                       ),
                     );
                   },
@@ -137,5 +157,27 @@ class _GuestHomePageState extends State<GuestHomePage> {
         ),
       )),
     );
+  }
+
+  void _getUserDetails() async {
+    try {
+      var response = await http.get(Uri.parse(Consts.CONSULTANT_PROFILE));
+      responseData = jsonDecode(response.body);
+      if (responseData["status"] == "success") {
+        var consultantProfile = responseData["consultant_profile"];
+        for (int i = 0; i < consultantProfile.length; i++) {
+          ConsultantProfileList profileData = new ConsultantProfileList();
+          profileData.consultantName = consultantProfile[i]["consultant_name"];
+          profileData.description = consultantProfile[i]["description"];
+          profileData.emailId = consultantProfile[i]["email_id"];
+          profileData.address = consultantProfile[i]["address"];
+          profileData.phoneNumber = consultantProfile[i]["phone_number"];
+          profileData.instagramId = consultantProfile[i]["instagram_id"];
+          profileData.whatsappNumber = consultantProfile[i]["whatsapp_number"];
+          profileDataList.add(profileData);
+        }
+        print("profiledata..." + profileDataList.toString());
+      }
+    } on Exception catch (e) {}
   }
 }

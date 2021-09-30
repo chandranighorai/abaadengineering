@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:abaadengineering/consts/app_consts.dart';
+import 'package:abaadengineering/ui/accounts/loginPage.dart';
 import 'package:abaadengineering/util/alertdialog.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ForgotPasswordDialog extends StatefulWidget {
   @override
@@ -65,6 +70,7 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
                       ),
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (value) => {
+                        print("Value..." + value.toString()),
                         setState(() {
                           userEmail = value;
                         }),
@@ -108,7 +114,7 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
                             ),
                             onPressed: () {
                               debugPrint("Hello");
-                              //_forgotPasswordEmail();
+                              _forgotPasswordEmail();
                             }),
                       ),
                     ],
@@ -162,13 +168,32 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
     );
   }
 
-  _forgotPasswordEmail() {
-    if (userEmail == null || userEmail == "") {
-      showCustomToast("Please enter email");
-      return;
-    } else {
-      showCustomToast("Coming soon");
-      // Navigator.pop(context);
+  _forgotPasswordEmail() async {
+    try {
+      if (userEmail == null || userEmail.trim().length == 0) {
+        showCustomToast("Please enter email");
+        return;
+      } else {
+        //showCustomToast("Coming soon");
+
+        // Navigator.pop(context);
+        var requestParam = "email_id=" + userEmail.trim().toString();
+        var forgrtUrl = Consts.FORGOT_PASSWORD + "?" + requestParam;
+        var response = await http.get(Uri.parse(forgrtUrl));
+        var responseData = jsonDecode(response.body);
+        print("response....o..." + responseData.toString());
+        showCustomToast(responseData["message"]);
+        if (responseData["status"].toString() == "failed") {
+        } else {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+              (route) => false);
+        }
+      }
+    } on Exception catch (e) {
+      print(e.toString());
+      print("No Network");
     }
   }
 }
