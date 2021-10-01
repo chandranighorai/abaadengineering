@@ -71,38 +71,62 @@ class _PreviousWorkState extends State<PreviousWork> {
               //  SizedBox(height: 60.0,),
             ],
           ),
-          Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 114.0,
-              //  color: Colors.grey,
-              child: FutureBuilder(
-                initialData: null,
-                future: _previousWork,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    var workList = snapshot.data.previousWorkList;
-                    return workList.length == 0
-                        ? Center(
-                            child: Text("No Data"),
-                          )
-                        : ListView.builder(
-                            // padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                            padding: EdgeInsets.all(0),
-                            itemCount: workList.length,
-                            itemBuilder: (context, index) {
-                              PreviousWorkList previousWorkList =
-                                  workList[index];
-                              return PreviousWorkModelList(
-                                  workList: previousWorkList);
-                            },
-                          );
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ))
+          Expanded(
+            child: Container(
+                width: MediaQuery.of(context).size.width,
+                //height: MediaQuery.of(context).size.height - 114.0,
+                //  color: Colors.grey,
+                child: FutureBuilder(
+                  initialData: null,
+                  future: _previousWork,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      var workList = snapshot.data.previousWorkList;
+                      return workList.length == 0
+                          ? Center(
+                              child: Text("No Data"),
+                            )
+                          : ListView.builder(
+                              // padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                              padding: EdgeInsets.all(0),
+                              itemCount: workList.length,
+                              itemBuilder: (context, index) {
+                                PreviousWorkList previousWorkList =
+                                    workList[index];
+                                return PreviousWorkModelList(
+                                    workList: previousWorkList);
+                              },
+                            );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Container(
+                width: 50,
+                height: 50,
+                child: CircularGradientButton(
+                  child: Icon(
+                    Icons.chevron_left,
+                    color: Colors.white,
+                  ),
+                  callback: () {
+                    Navigator.pop(context);
+                  },
+                  gradient: LinearGradient(
+                      colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft),
+                ),
+              ),
+            ),
+          ),
         ]),
       ),
     );

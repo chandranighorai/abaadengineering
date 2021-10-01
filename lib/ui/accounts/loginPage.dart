@@ -15,6 +15,7 @@ import 'package:abaadengineering/util/alertdialog.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -93,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
           MaterialPageRoute(
               builder: (context) => ProjectsListScreen(
                     userData: userData,
+                    userType:"Customer"
                   )),
         );
       } else

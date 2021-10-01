@@ -7,6 +7,7 @@ import 'package:abaadengineering/ui/consultant_profile/someOfOurDesign/SomeDesig
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 class SomeOfDesign extends StatefulWidget {
   const SomeOfDesign({Key key}) : super(key: key);
@@ -72,37 +73,61 @@ class _SomeOfDesignState extends State<SomeOfDesign> {
                 //  SizedBox(height: 60.0,),
               ],
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 114.0,
-              //color: Colors.red,
-              //padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-              // decoration: BoxDecoration(
-              //     ),
-              child: FutureBuilder(
-                  initialData: null,
-                  future: _designList,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      var imageList = snapshot.data.viewDesignList;
-                      return imageList.length == 0
-                          ? Center(
-                              child: Text("No Data"),
-                            )
-                          : ListView.builder(
-                              padding: EdgeInsets.all(0),
-                              itemCount: imageList.length,
-                              itemBuilder: (BuildContext context, index) {
-                                ViewDesignList viewDesign = imageList[index];
-                                return SomeDesignList(viewDesign: viewDesign);
-                              });
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  }),
-            )
+            Expanded(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height - 114.0,
+                //color: Colors.red,
+                //padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+                // decoration: BoxDecoration(
+                //     ),
+                child: FutureBuilder(
+                    initialData: null,
+                    future: _designList,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        var imageList = snapshot.data.viewDesignList;
+                        return imageList.length == 0
+                            ? Center(
+                                child: Text("No Data"),
+                              )
+                            : ListView.builder(
+                                padding: EdgeInsets.all(0),
+                                itemCount: imageList.length,
+                                itemBuilder: (BuildContext context, index) {
+                                  ViewDesignList viewDesign = imageList[index];
+                                  return SomeDesignList(viewDesign: viewDesign);
+                                });
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    }),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  child: CircularGradientButton(
+                    child: Icon(
+                      Icons.chevron_left,
+                      color: Colors.white,
+                    ),
+                    callback: () {
+                      Navigator.pop(context);
+                    },
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -181,5 +181,5 @@ class _GovernmentalPaymentsState extends State<GovernmentalPayments> {
   }
 
   List<String> options = ["Living Room", "Bedroom", "Kitchen", "Bath"];
-  List<double> completed = [0.5, 0.65, 0.7, 0.85];
+  // List<double> completed = [0.5, 0.65, 0.7, 0.85];
 }

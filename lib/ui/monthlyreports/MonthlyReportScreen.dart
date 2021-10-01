@@ -200,61 +200,147 @@ class _MonthlyReportScreenState extends State<MonthlyReportScreen> {
               ),
             ),
           ),
-          Stack(
-            children: [
-              Row(
-                children: <Widget>[
-                  Flexible(
-                    child: new GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProjectsListScreen(),
-                            ),
-                          );
-                        },
-                        child: SvgPicture.asset(iconHome,
-                            matchTextDirection: false)),
-                    flex: 1,
-                  ),
-                  Flexible(
-                    child: new GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AccountActivity(),
-                            ),
-                          );
-                        },
-                        child: SvgPicture.asset(iconAccount,
-                            matchTextDirection: false)),
-                    flex: 1,
-                  ),
-                ],
-              ),
-              Center(
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  child: CircularGradientButton(
-                    child: Icon(
-                      Icons.chevron_left,
-                      color: Colors.white,
+
+          //bottom design modification
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.width * 0.25,
+            //color: Colors.amber,
+            child: Stack(
+              children: [
+                Positioned(
+                    top: MediaQuery.of(context).size.height * 0.04,
+                    bottom: MediaQuery.of(context).size.height * 0.00,
+                    left: MediaQuery.of(context).size.width * 0.00,
+                    right: MediaQuery.of(context).size.width * 0.00,
+                    child: Container(
+                      //height: MediaQuery.of(context).size.width * 0.16,
+                      //color: Colors.red,
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProjectsListScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: SvgPicture.asset(
+                                  iconHome,
+                                  matchTextDirection: false,
+                                  fit: BoxFit.fill,
+                                )),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AccountActivity(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: SvgPicture.asset(
+                                  iconAccount,
+                                  matchTextDirection: false,
+                                  fit: BoxFit.fill,
+                                )),
+                          ),
+                          //)
+                        ],
+                      ),
+                    )),
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.01,
+                  bottom: MediaQuery.of(context).size.height * 0.05,
+                  left: MediaQuery.of(context).size.width * 0.00,
+                  right: MediaQuery.of(context).size.width * 0.00,
+                  //child: //       Center(
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    //color: Colors.amber,
+                    child: CircularGradientButton(
+                      child: Icon(
+                        Icons.chevron_left,
+                        color: Colors.white,
+                      ),
+                      callback: () {
+                        Navigator.pop(context);
+                      },
+                      gradient: LinearGradient(
+                          colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft),
                     ),
-                    callback: () {
-                      Navigator.pop(context);
-                    },
-                    gradient: LinearGradient(
-                        colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft),
                   ),
                 ),
-              ),
-            ],
+                // )
+              ],
+            ),
           ),
+
+          // Stack(
+          //   children: [
+          //     Row(
+          //       children: <Widget>[
+          //         Flexible(
+          //           child: new GestureDetector(
+          //               onTap: () {
+          //                 Navigator.push(
+          //                   context,
+          //                   MaterialPageRoute(
+          //                     builder: (context) => ProjectsListScreen(),
+          //                   ),
+          //                 );
+          //               },
+          //               child: SvgPicture.asset(iconHome,
+          //                   matchTextDirection: false)),
+          //           flex: 1,
+          //         ),
+          //         Flexible(
+          //           child: new GestureDetector(
+          //               onTap: () {
+          //                 Navigator.push(
+          //                   context,
+          //                   MaterialPageRoute(
+          //                     builder: (context) => AccountActivity(),
+          //                   ),
+          //                 );
+          //               },
+          //               child: SvgPicture.asset(iconAccount,
+          //                   matchTextDirection: false)),
+          //           flex: 1,
+          //         ),
+          //       ],
+          //     ),
+          //     Center(
+          //       child: Container(
+          //         width: 50,
+          //         height: 50,
+          //         child: CircularGradientButton(
+          //           child: Icon(
+          //             Icons.chevron_left,
+          //             color: Colors.white,
+          //           ),
+          //           callback: () {
+          //             Navigator.pop(context);
+          //           },
+          //           gradient: LinearGradient(
+          //               colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+          //               begin: Alignment.centerRight,
+          //               end: Alignment.centerLeft),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ],
       )),
     );

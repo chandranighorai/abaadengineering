@@ -77,124 +77,45 @@ class _ContactUsActivityState extends State<ContactUsActivity> {
             ),
           ],
         ),
-        Column(
-          children: <Widget>[
-            SizedBox(height: 80.0),
-            Container(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  gradient: LinearGradient(
-                      colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft),
-                ),
-                child: Row(children: <Widget>[
-                  FlatButton.icon(
-                    onPressed: null,
-                    //icon: Icon(Icons.phone, color: Colors.white),
-                    icon: Icon(Icons.person, color: Colors.white),
-                    //label: Text("+971 92 37 3305",
-                    label: Text("${profile.consultantName}",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white,
-                        )),
-                    padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                  )
-                ])),
-            SizedBox(height: 10.0),
-            InkWell(
-              onTap: () {
-                _directCall(profile.phoneNumber.toString());
-              },
-              child: Container(
+        Expanded(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 80.0),
+              Container(
                   margin: EdgeInsets.only(left: 15.0, right: 15.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     gradient: LinearGradient(
-                        colors: [Color(0xFF2196F3), Color(0xFF38068f)],
+                        colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
                         begin: Alignment.centerRight,
                         end: Alignment.centerLeft),
                   ),
                   child: Row(children: <Widget>[
                     FlatButton.icon(
                       onPressed: null,
-                      icon: Icon(Icons.phone, color: Colors.white),
-                      label: Text("${profile.phoneNumber}",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
-                          )),
+                      //icon: Icon(Icons.phone, color: Colors.white),
+                      icon: Icon(Icons.person, color: Colors.white),
+                      //label: Text("+971 92 37 3305",
+                      label:
+                          //Text("${profile.consultantName}",
+                          Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        child: Text("${profile.consultantName}",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                            )),
+                      ),
                       padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
                     )
                   ])),
-            ),
-            SizedBox(height: 10.0),
-            Container(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  gradient: LinearGradient(
-                      colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft),
-                ),
-                child: Row(children: <Widget>[
-                  FlatButton.icon(
-                    onPressed: null,
-                    icon: Icon(Icons.email_outlined, color: Colors.white),
-                    label: Text("${profile.emailId}",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.white,
-                        )),
-                    padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                  )
-                ])),
-            SizedBox(height: 10.0),
-            InkWell(
-              onTap: () {
-                _whatsappOpen(profile.whatsappNumber.toString());
-              },
-              child: Container(
-                  margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    gradient: LinearGradient(
-                        colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft),
-                  ),
-                  child: Row(children: <Widget>[
-                    FlatButton.icon(
-                      onPressed: null,
-                      icon:
-                          Icon(FontAwesomeIcons.whatsapp, color: Colors.white),
-                      label: Text("${profile.whatsappNumber}",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.white,
-                          )),
-                      padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                    )
-                  ])),
-            ),
-            SizedBox(height: 40.0),
-            widget.userType == "Guest" || widget.userType.toString() == "null"
-                ? SizedBox()
-                : Text(
-                    "Or Let’s Have A Chat Here",
-                    style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.indigo),
-                  ),
-            SizedBox(height: 20.0),
-            widget.userType == "Guest" || widget.userType.toString() == "null"
-                ? SizedBox()
-                : Container(
-                    margin: EdgeInsets.only(left: 100.0, right: 120.0),
+              SizedBox(height: 10.0),
+              InkWell(
+                onTap: () {
+                  _directCall(profile.phoneNumber.toString());
+                },
+                child: Container(
+                    margin: EdgeInsets.only(left: 15.0, right: 15.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       gradient: LinearGradient(
@@ -204,24 +125,132 @@ class _ContactUsActivityState extends State<ContactUsActivity> {
                     ),
                     child: Row(children: <Widget>[
                       FlatButton.icon(
-                        onPressed: () {
-                          print("ChatRoom Clicked...");
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ChatRoom()));
-                        },
-                        icon: Icon(Icons.chat_outlined, color: Colors.white),
-                        label: Text("CHAT ROOM",
+                        onPressed: null,
+                        icon: Icon(Icons.phone, color: Colors.white),
+                        label: Text("${profile.phoneNumber}",
                             style: TextStyle(
-                              fontSize: 14.0,
+                              fontSize: 16.0,
                               color: Colors.white,
                             )),
-                        padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                        padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
                       )
                     ])),
-          ],
-        )
+              ),
+              SizedBox(height: 10.0),
+              Container(
+                  margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                  child: Row(children: <Widget>[
+                    FlatButton.icon(
+                      onPressed: null,
+                      icon: Icon(Icons.email_outlined, color: Colors.white),
+                      label: Text("${profile.emailId}",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.white,
+                          )),
+                      padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                    )
+                  ])),
+              SizedBox(height: 10.0),
+              InkWell(
+                onTap: () {
+                  _whatsappOpen(profile.whatsappNumber.toString());
+                },
+                child: Container(
+                    margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      gradient: LinearGradient(
+                          colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft),
+                    ),
+                    child: Row(children: <Widget>[
+                      FlatButton.icon(
+                        onPressed: null,
+                        icon: Icon(FontAwesomeIcons.whatsapp,
+                            color: Colors.white),
+                        label: Text("${profile.whatsappNumber}",
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: Colors.white,
+                            )),
+                        padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                      )
+                    ])),
+              ),
+              SizedBox(height: 40.0),
+              widget.userType == "Guest"
+                  ? SizedBox()
+                  : Text(
+                      "Or Let’s Have A Chat Here",
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.indigo),
+                    ),
+              SizedBox(height: 20.0),
+              widget.userType == "Guest"
+                  ? SizedBox()
+                  : Container(
+                      margin: EdgeInsets.only(left: 100.0, right: 120.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        gradient: LinearGradient(
+                            colors: [Color(0xFF2196F3), Color(0xFF38068f)],
+                            begin: Alignment.centerRight,
+                            end: Alignment.centerLeft),
+                      ),
+                      child: Row(children: <Widget>[
+                        FlatButton.icon(
+                          onPressed: () {
+                            print("ChatRoom Clicked...");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChatRoom()));
+                          },
+                          icon: Icon(Icons.chat_outlined, color: Colors.white),
+                          label: Text("CHAT ROOM",
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.white,
+                              )),
+                          padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                        )
+                      ])),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Container(
+              width: 50,
+              height: 50,
+              child: CircularGradientButton(
+                child: Icon(
+                  Icons.chevron_left,
+                  color: Colors.white,
+                ),
+                callback: () {
+                  Navigator.pop(context);
+                },
+                gradient: LinearGradient(
+                    colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                    begin: Alignment.centerRight,
+                    end: Alignment.centerLeft),
+              ),
+            ),
+          ),
+        ),
       ])),
     );
   }

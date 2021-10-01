@@ -6,6 +6,7 @@ import 'package:abaadengineering/util/alertdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 class ChangePassword extends StatefulWidget {
   final String option;
@@ -32,6 +33,8 @@ class _ChangePasswordState extends State<ChangePassword> {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
               Row(
@@ -127,7 +130,33 @@ class _ChangePasswordState extends State<ChangePassword> {
                             fontSize: MediaQuery.of(context).size.width * 0.05),
                       )),
                 ),
-              )
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      //color: Colors.red,
+                      child: CircularGradientButton(
+                        child: Icon(
+                          Icons.chevron_left,
+                          color: Colors.white,
+                        ),
+                        callback: () {
+                          Navigator.pop(context);
+                        },
+                        gradient: LinearGradient(
+                            colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                            begin: Alignment.centerRight,
+                            end: Alignment.centerLeft),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

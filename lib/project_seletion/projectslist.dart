@@ -18,8 +18,9 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 
 class ProjectsListScreen extends StatefulWidget {
   final UserData userData;
-
-  const ProjectsListScreen({Key key, this.userData}) : super(key: key);
+  final String userType;
+  const ProjectsListScreen({Key key, this.userData, this.userType})
+      : super(key: key);
   @override
   _ProjectsListScreenState createState() => _ProjectsListScreenState();
 }
@@ -82,6 +83,7 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
   @override
   Widget build(BuildContext context) {
     UserData userData = widget.userData;
+    print("UserType......in projectList..." + widget.userType.toString());
     return Scaffold(
       body: SafeArea(
         child: WillPopScope(
@@ -164,8 +166,8 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
                                     itemBuilder: (context, int index) {
                                       Projects projects = listProjects[index];
                                       return ItemProjects(
-                                        projects: projects,
-                                      );
+                                          projects: projects,
+                                          userType: widget.userType);
                                     });
                           } else {
                             print("sfsdfsfs...." + snapshot.hasData.toString());
@@ -177,66 +179,152 @@ class _ProjectsListScreenState extends State<ProjectsListScreen> {
                       ),
               ),
               //Spacer(),
-              Stack(
-                children: [
-                  Row(
-                    children: <Widget>[
-                      Flexible(
-                        child: new GestureDetector(
-                            onTap: () {},
-                            child: SvgPicture.asset(iconHome,
-                                //fit: BoxFit.fitHeight,
-                                matchTextDirection: false)),
-                        flex: 1,
-                        //flex: 0,
-                      ),
-                      Flexible(
-                        child: new GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AccountActivity(),
-                                ),
-                              );
-                            },
-                            child: SvgPicture.asset(iconAccount,
-                                //fit: BoxFit.fitHeight,
-                                matchTextDirection: false)),
-                        //flex: 0,
-                        flex: 1,
-                      ),
-                    ],
-                  ),
-                  Center(
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      child: CircularGradientButton(
-                        child: Icon(
-                          Icons.chevron_left,
-                          color: Colors.white,
+
+              //bottom design modification
+
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width * 0.25,
+                //color: Colors.amber,
+                child: Stack(
+                  children: [
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 0.04,
+                        bottom: MediaQuery.of(context).size.height * 0.00,
+                        left: MediaQuery.of(context).size.width * 0.00,
+                        right: MediaQuery.of(context).size.width * 0.00,
+                        child: Container(
+                          //height: MediaQuery.of(context).size.width * 0.16,
+                          //color: Colors.red,
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: SvgPicture.asset(
+                                    iconHome,
+                                    matchTextDirection: false,
+                                    fit: BoxFit.fill,
+                                  )),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AccountActivity(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: SvgPicture.asset(
+                                      iconAccount,
+                                      matchTextDirection: false,
+                                      fit: BoxFit.fill,
+                                    )),
+                              ),
+                              //)
+                            ],
+                          ),
+                        )),
+                    Positioned(
+                      top: MediaQuery.of(context).size.height * 0.01,
+                      bottom: MediaQuery.of(context).size.height * 0.05,
+                      left: MediaQuery.of(context).size.width * 0.00,
+                      right: MediaQuery.of(context).size.width * 0.00,
+                      //child: //       Center(
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        //color: Colors.amber,
+                        child: CircularGradientButton(
+                          child: Icon(
+                            Icons.chevron_left,
+                            color: Colors.white,
+                          ),
+                          callback: () {
+                            DateTime now = DateTime.now();
+                            if (currentBackPressTime == null ||
+                                now.difference(currentBackPressTime) >
+                                    Duration(seconds: 2)) {
+                              currentBackPressTime = now;
+                              Fluttertoast.showToast(msg: "Tap again to exit");
+                            } else {
+                              SystemNavigator.pop();
+                            }
+                          },
+                          gradient: LinearGradient(
+                              colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft),
                         ),
-                        callback: () {
-                          DateTime now = DateTime.now();
-                          if (currentBackPressTime == null ||
-                              now.difference(currentBackPressTime) >
-                                  Duration(seconds: 2)) {
-                            currentBackPressTime = now;
-                            Fluttertoast.showToast(msg: "Tap again to exit");
-                          } else {
-                            SystemNavigator.pop();
-                          }
-                        },
-                        gradient: LinearGradient(
-                            colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft),
                       ),
                     ),
-                  ),
-                ],
+                    // )
+                  ],
+                ),
               ),
+
+              // Stack(
+              //   children: [
+              //     Row(
+              //       children: <Widget>[
+              //         Flexible(
+              //           child: new GestureDetector(
+              //               onTap: () {},
+              //               child: SvgPicture.asset(iconHome,
+              //                   //fit: BoxFit.fitHeight,
+              //                   matchTextDirection: false)),
+              //           flex: 1,
+              //           //flex: 0,
+              //         ),
+              //         Flexible(
+              //           child: new GestureDetector(
+              //               onTap: () {
+              //                 Navigator.push(
+              //                   context,
+              //                   MaterialPageRoute(
+              //                     builder: (context) => AccountActivity(),
+              //                   ),
+              //                 );
+              //               },
+              //               child: SvgPicture.asset(iconAccount,
+              //                   //fit: BoxFit.fitHeight,
+              //                   matchTextDirection: false)),
+              //           //flex: 0,
+              //           flex: 1,
+              //         ),
+              //       ],
+              //     ),
+              //     Center(
+              //       child: Container(
+              //         width: 50,
+              //         height: 50,
+              //         child: CircularGradientButton(
+              //           child: Icon(
+              //             Icons.chevron_left,
+              //             color: Colors.white,
+              //           ),
+              //           callback: () {
+              //             DateTime now = DateTime.now();
+              //             if (currentBackPressTime == null ||
+              //                 now.difference(currentBackPressTime) >
+              //                     Duration(seconds: 2)) {
+              //               currentBackPressTime = now;
+              //               Fluttertoast.showToast(msg: "Tap again to exit");
+              //             } else {
+              //               SystemNavigator.pop();
+              //             }
+              //           },
+              //           gradient: LinearGradient(
+              //               colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+              //               begin: Alignment.centerRight,
+              //               end: Alignment.centerLeft),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),

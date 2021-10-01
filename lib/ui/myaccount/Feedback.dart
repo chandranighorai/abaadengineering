@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 class FeedBack extends StatefulWidget {
   final String option;
@@ -31,6 +32,8 @@ class _FeedBackState extends State<FeedBack> {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
               Row(
@@ -128,7 +131,30 @@ class _FeedBackState extends State<FeedBack> {
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.05),
                         ))),
-              )
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    //color: Colors.teal,
+                    child: CircularGradientButton(
+                      child: Icon(
+                        Icons.chevron_left,
+                        color: Colors.white,
+                      ),
+                      callback: () {
+                        Navigator.pop(context);
+                      },
+                      gradient: LinearGradient(
+                          colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

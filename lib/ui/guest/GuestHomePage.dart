@@ -11,7 +11,8 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:http/http.dart' as http;
 
 class GuestHomePage extends StatefulWidget {
-  const GuestHomePage({Key key}) : super(key: key);
+  String userType;
+  GuestHomePage({this.userType, Key key}) : super(key: key);
 
   @override
   _GuestHomePageState createState() => _GuestHomePageState();
@@ -36,6 +37,7 @@ class _GuestHomePageState extends State<GuestHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("UserType......in Guest..." + widget.userType.toString());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -109,7 +111,8 @@ class _GuestHomePageState extends State<GuestHomePage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ContactUsActivity(
-                            userType: "Guest", profileData: profileDataList),
+                            userType: widget.userType,
+                            profileData: profileDataList),
                       ),
                     );
                   },
@@ -125,8 +128,9 @@ class _GuestHomePageState extends State<GuestHomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ConsultantProfile(),
-                      ),
+                          builder: (context) => ConsultantProfile(
+                                userTypeConsultant: widget.userType,
+                              )),
                     );
                   },
                 )

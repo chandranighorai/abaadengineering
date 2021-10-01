@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_html/flutter_html.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 class LegalInformation extends StatefulWidget {
   final String option;
@@ -92,7 +93,29 @@ class _LegalInformationState extends State<LegalInformation> {
                               data: responseData["legal_information"]
                                   ["content"]),
                         ),
-                      ))
+                      )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  child: CircularGradientButton(
+                    child: Icon(
+                      Icons.chevron_left,
+                      color: Colors.white,
+                    ),
+                    callback: () {
+                      Navigator.pop(context);
+                    },
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       )),

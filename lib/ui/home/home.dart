@@ -90,7 +90,7 @@ class ScaffoldExample extends StatelessWidget {
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => GuestHomePage())),
+                            builder: (context) => GuestHomePage(userType:"Guest"))),
                   ),
                 ),
               ],

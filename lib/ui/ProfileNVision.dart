@@ -6,7 +6,6 @@ import 'package:abaadengineering/styles/my_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
-
 class ProfileNVision extends StatefulWidget {
   var profileData;
   ProfileNVision({this.profileData});
@@ -65,22 +64,43 @@ class _ProfileNVisionState extends State<ProfileNVision> {
               //  SizedBox(height: 60.0,),
             ],
           ),
-          Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 114.0,
-              //  color: Colors.grey,
-              child: ListView.builder(
-                // padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                itemCount: widget.profileData.length,
-                itemBuilder: (context, index) {
-                  ConsultantProfileList consultantProfile =
-                      widget.profileData[index];
-                  return VisionProfileList(
-                    visionList: consultantProfile
-                  );
-                  
-                },
-              ))
+          Expanded(
+            child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height - 114.0,
+                //  color: Colors.grey,
+                child: ListView.builder(
+                  // padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                  itemCount: widget.profileData.length,
+                  itemBuilder: (context, index) {
+                    ConsultantProfileList consultantProfile =
+                        widget.profileData[index];
+                    return VisionProfileList(visionList: consultantProfile);
+                  },
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Container(
+                width: 50,
+                height: 50,
+                child: CircularGradientButton(
+                  child: Icon(
+                    Icons.chevron_left,
+                    color: Colors.white,
+                  ),
+                  callback: () {
+                    Navigator.pop(context);
+                  },
+                  gradient: LinearGradient(
+                      colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft),
+                ),
+              ),
+            ),
+          ),
         ]),
       ),
     );
@@ -134,5 +154,4 @@ class _ProfileNVisionState extends State<ProfileNVision> {
   //   "images/img_44.jpg",
   // ];
 
-  
 }

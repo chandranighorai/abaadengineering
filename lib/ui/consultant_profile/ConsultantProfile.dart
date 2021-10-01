@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:abaadengineering/consts/app_consts.dart';
 import 'package:abaadengineering/ui/ProfileNVision.dart';
 import 'package:abaadengineering/ui/consultant_profile/ConsultantModel.dart';
+//import 'package:abaadengineering/ui/consultant_profile/ConsultantModel.dart';
 
 import 'package:abaadengineering/ui/consultant_profile/customerFeedback/CustomerFeedback.dart';
 import 'package:abaadengineering/ui/consultant_profile/previousWork/PreviousWork.dart';
@@ -19,8 +20,9 @@ import '../contactus/ContactUsActivity.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ConsultantProfile extends StatefulWidget {
-  // final String userType;
-  // ConsultantProfile({this.userType});
+  String userTypeConsultant;
+
+  ConsultantProfile({this.userTypeConsultant});
   @override
   _ConsultantProfileState createState() => _ConsultantProfileState();
 }
@@ -44,6 +46,8 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "userType.....in consultant..." + widget.userTypeConsultant.toString());
     return Scaffold(
       body: Container(
           child: Column(children: <Widget>[
@@ -84,203 +88,228 @@ class _ConsultantProfileState extends State<ConsultantProfile> {
             ),
           ],
         ),
-        Column(
-          children: <Widget>[
-            SizedBox(height: 60.0),
-            Container(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  gradient: LinearGradient(
-                      colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft),
+        Expanded(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 60.0),
+              Container(
+                  margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                  child: Container(
+                      padding: EdgeInsets.all(15.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileNVision(
+                                      profileData: profileDataList)),
+                            );
+                          },
+                          child: Row(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(right: 10.0),
+                              child: SvgPicture.asset(iconVision),
+                            ),
+                            Text("View Our Profile And Vision",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  // fontWeight: FontWeight.bold
+                                )),
+                          ])))),
+              SizedBox(height: 10.0),
+              Container(
+                  margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFF2196F3), Color(0xFF38068f)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                  child: Container(
+                      padding: EdgeInsets.all(18.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SomeOfDesign()),
+                            );
+                          },
+                          child: Row(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(right: 10.0),
+                              child: SvgPicture.asset(iconDesign),
+                            ),
+                            Text("View Some Of Our Designs",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  // fontWeight: FontWeight.bold
+                                )),
+                          ])))),
+              SizedBox(height: 10.0),
+              Container(
+                  margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                  child: Container(
+                      padding: EdgeInsets.all(18.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PreviousWork()),
+                            );
+                          },
+                          child: Row(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(right: 10.0),
+                              child: SvgPicture.asset(iconWork),
+                            ),
+                            Text("View Previous Work Done",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  // fontWeight: FontWeight.bold
+                                )),
+                          ])))),
+              SizedBox(height: 10.0),
+              Container(
+                  margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                  child: Container(
+                      padding: EdgeInsets.all(15.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CustomerFeedback()),
+                            );
+                          },
+                          child: Row(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(right: 10.0),
+                              child: SvgPicture.asset(iconFeedback),
+                            ),
+                            Text("Our Valued Customers Feedback",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  // fontWeight: FontWeight.bold
+                                )),
+                          ])))),
+              SizedBox(height: 10.0),
+              Container(
+                  margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                  child: Container(
+                      padding: EdgeInsets.all(15.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ContactUsActivity(
+                                      userType: widget.userTypeConsultant,
+                                      profileData: profileDataList)),
+                            );
+                          },
+                          child: Row(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(right: 10.0),
+                              child: SvgPicture.asset(iconContact),
+                            ),
+                            Text("Contact Us",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  // fontWeight: FontWeight.bold
+                                )),
+                          ])))),
+              SizedBox(height: 10.0),
+              Container(
+                  margin: EdgeInsets.only(left: 15.0, right: 15.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFF2196F3), Color(0xFF38068f)],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft),
+                  ),
+                  child: Container(
+                      padding: EdgeInsets.all(18.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            _viewOurLocation(_viewOurLocation(
+                                responseData["consultant_profile"][0]
+                                        ["map_link"]
+                                    .toString()));
+                          },
+                          child: Row(children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.only(right: 10.0),
+                              child: SvgPicture.asset(iconMarker),
+                            ),
+                            Text("View Our Location",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                  // fontWeight: FontWeight.bold
+                                )),
+                          ])))),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Container(
+              width: 50,
+              height: 50,
+              child: CircularGradientButton(
+                child: Icon(
+                  Icons.chevron_left,
+                  color: Colors.white,
                 ),
-                child: Container(
-                    padding: EdgeInsets.all(15.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfileNVision(
-                                    profileData: profileDataList)),
-                          );
-                        },
-                        child: Row(children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: SvgPicture.asset(iconVision),
-                          ),
-                          Text("View Our Profile And Vision",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                // fontWeight: FontWeight.bold
-                              )),
-                        ])))),
-            SizedBox(height: 10.0),
-            Container(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  gradient: LinearGradient(
-                      colors: [Color(0xFF2196F3), Color(0xFF38068f)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft),
-                ),
-                child: Container(
-                    padding: EdgeInsets.all(18.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SomeOfDesign()),
-                          );
-                        },
-                        child: Row(children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: SvgPicture.asset(iconDesign),
-                          ),
-                          Text("View Some Of Our Designs",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                // fontWeight: FontWeight.bold
-                              )),
-                        ])))),
-            SizedBox(height: 10.0),
-            Container(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  gradient: LinearGradient(
-                      colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft),
-                ),
-                child: Container(
-                    padding: EdgeInsets.all(18.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PreviousWork()),
-                          );
-                        },
-                        child: Row(children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: SvgPicture.asset(iconWork),
-                          ),
-                          Text("View Previous Work Done",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                // fontWeight: FontWeight.bold
-                              )),
-                        ])))),
-            SizedBox(height: 10.0),
-            Container(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  gradient: LinearGradient(
-                      colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft),
-                ),
-                child: Container(
-                    padding: EdgeInsets.all(15.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CustomerFeedback()),
-                          );
-                        },
-                        child: Row(children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: SvgPicture.asset(iconFeedback),
-                          ),
-                          Text("Our Valued Customers Feedback",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                // fontWeight: FontWeight.bold
-                              )),
-                        ])))),
-            SizedBox(height: 10.0),
-            Container(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  gradient: LinearGradient(
-                      colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft),
-                ),
-                child: Container(
-                    padding: EdgeInsets.all(15.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ContactUsActivity(
-                                    //userType: "Customer",
-                                    profileData: profileDataList)),
-                          );
-                        },
-                        child: Row(children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: SvgPicture.asset(iconContact),
-                          ),
-                          Text("Contact Us",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                // fontWeight: FontWeight.bold
-                              )),
-                        ])))),
-            SizedBox(height: 10.0),
-            Container(
-                margin: EdgeInsets.only(left: 15.0, right: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  gradient: LinearGradient(
-                      colors: [Color(0xFF2196F3), Color(0xFF38068f)],
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft),
-                ),
-                child: Container(
-                    padding: EdgeInsets.all(18.0),
-                    child: GestureDetector(
-                        onTap: () {
-                          _viewOurLocation(responseData["consultant_profile"][0]
-                                  ["map_link"]
-                              .toString());
-                        },
-                        child: Row(children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: SvgPicture.asset(iconMarker),
-                          ),
-                          Text("View Our Location",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.white,
-                                // fontWeight: FontWeight.bold
-                              )),
-                        ])))),
-          ],
-        )
+                callback: () {
+                  Navigator.pop(context);
+                },
+                gradient: LinearGradient(
+                    colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
+                    begin: Alignment.centerRight,
+                    end: Alignment.centerLeft),
+              ),
+            ),
+          ),
+        ),
       ])),
     );
   }

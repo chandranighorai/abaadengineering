@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class ItemProjects extends StatefulWidget {
   final Projects projects;
-
-  const ItemProjects({Key key, this.projects}) : super(key: key);
+  final String userType;
+  const ItemProjects({Key key, this.projects,this.userType}) : super(key: key);
   @override
   _ItemProjectsState createState() => _ItemProjectsState();
 }
@@ -25,6 +25,7 @@ class _ItemProjectsState extends State<ItemProjects> {
             MaterialPageRoute(
               builder: (context) => MainActivity(
                 projects: project,
+                userType: widget.userType
               ),
             ),
           )
