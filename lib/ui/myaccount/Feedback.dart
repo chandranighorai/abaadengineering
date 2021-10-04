@@ -116,7 +116,7 @@ class _FeedBackState extends State<FeedBack> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Color(0xFFC7D5EF), Color(0xFFC78FC0)],
+                            colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
                             begin: Alignment.centerRight,
                             end: Alignment.centerLeft),
                         borderRadius: BorderRadius.all(Radius.circular(

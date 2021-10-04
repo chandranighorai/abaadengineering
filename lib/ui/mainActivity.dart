@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:abaadengineering/consts/app_consts.dart';
 import 'package:abaadengineering/models/projects_model.dart';
+import 'package:abaadengineering/project_seletion/projectslist.dart';
 import 'package:abaadengineering/ui/consultant_profile/ConsultantModel.dart';
 import 'package:abaadengineering/ui/myaccount/AccountActivity.dart';
 import 'package:abaadengineering/ui/payment_collections/PaymentMonthList.dart';
@@ -316,14 +317,24 @@ class _MainPageState extends State<MainActivity> {
                               //color: Colors.red,
                               child: Row(
                                 children: [
-                                  Container(
-                                      width:
-                                          MediaQuery.of(context).size.width / 2,
-                                      child: SvgPicture.asset(
-                                        iconHome,
-                                        matchTextDirection: false,
-                                        fit: BoxFit.fill,
-                                      )),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProjectsListScreen()));
+                                    },
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2,
+                                        child: SvgPicture.asset(
+                                          iconHome,
+                                          matchTextDirection: false,
+                                          fit: BoxFit.fill,
+                                        )),
+                                  ),
                                   InkWell(
                                     onTap: () {
                                       Navigator.push(

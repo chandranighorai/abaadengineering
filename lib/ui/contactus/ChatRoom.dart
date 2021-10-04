@@ -73,115 +73,156 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height,
+        //height: MediaQuery.of(context).size.height,
         //width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                SizedBox(height: 140.0),
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10.0),
-                          bottomRight: Radius.circular(10.0)),
-                      gradient: LinearGradient(
-                          colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft),
-                    ),
-                    child: Row(children: <Widget>[
-                      FlatButton(
-                        child: Text(
-                          'Chat Room',
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
-                        ),
-                        // color: Colors.blueAccent,
-                        padding: EdgeInsets.fromLTRB(15.0, 15.0, 170.0, 15.0),
+        child: SafeArea(
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              // Row(
+              //   children: <Widget>[
+              //     //SizedBox(height: 140.0),
+              //     Container(
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.only(
+              //               topRight: Radius.circular(10.0),
+              //               bottomRight: Radius.circular(10.0)),
+              //           gradient: LinearGradient(
+              //               colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
+              //               begin: Alignment.centerRight,
+              //               end: Alignment.centerLeft),
+              //         ),
+              //         child: Row(children: <Widget>[
+              //           FlatButton(
+              //             child: Text(
+              //               'Chat Room',
+              //               style: TextStyle(fontSize: 20.0, color: Colors.white),
+              //             ),
+              //             // color: Colors.blueAccent,
+              //             padding: EdgeInsets.fromLTRB(15.0, 15.0, 170.0, 15.0),
 
-                        // color: Colors.white,
-                        // onPressed: _nextActivity,
-                      ),
-                    ])),
-                // SizedBox(
-                //   width: 15.0,
-                //   height: 30.0,
-                // ),
-                SvgPicture.asset(iconLogo,
-                    matchTextDirection: false, height: 70.0, width: 68.0),
-                SizedBox(
-                  height: 60.0,
-                ),
-              ],
-            ),
-            Expanded(
-                child: FutureBuilder(
-              initialData: null,
-              future: chatList,
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  var chatList = snapshot.data.messageList;
-                  return chatList.length == 0
-                      ? Container(
-                          color: Colors.white,
-                          child: Text("No message yet"),
-                        )
-                      : ListView.builder(
-                          padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.02,
-                            right: MediaQuery.of(context).size.width * 0.02,
-                            // top: MediaQuery.of(context).size.width * 0.00,
-                            // bottom: MediaQuery.of(context).size.width * 0.00,
-                          ),
-                          reverse: true,
-                          shrinkWrap: true,
-                          itemCount: chatList.length,
-                          itemBuilder: (context, int index) {
-                            MessageList chatModel = chatList[index];
-                            return ChatList(chatModel: chatModel);
-                          });
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            )),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.08,
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.02,
-                  right: MediaQuery.of(context).size.width * 0.02),
-              child: Row(
-                children: [
+              //             // color: Colors.white,
+              //             // onPressed: _nextActivity,
+              //           ),
+              //         ])),
+              //     // SizedBox(
+              //     //   width: 15.0,
+              //     //   height: 30.0,
+              //     // ),
+              //     SvgPicture.asset(iconLogo,
+              //         matchTextDirection: false, height: 70.0, width: 68.0),
+              //     SizedBox(
+              //       height: 60.0,
+              //     ),
+              //   ],
+              // ),
+              Row(
+                children: <Widget>[
+                  //SizedBox(height: 140.0),
                   Container(
-                    width: MediaQuery.of(context).size.width / 1.2,
-                    //color: Colors.red,
-                    child: TextFormField(
-                      controller: messageText,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        hintText: "Write message",
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0)),
+                        gradient: LinearGradient(
+                            colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
+                            begin: Alignment.centerRight,
+                            end: Alignment.centerLeft),
                       ),
-                      onChanged: (value) {
-                        print("val..." + value.toString());
-                      },
-                    ),
+                      child: Row(children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            'Chat Room',
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
+                          ),
+                          // color: Colors.blueAccent,
+                          padding: EdgeInsets.fromLTRB(15.0, 15.0, 170.0, 15.0),
+
+                          // color: Colors.white,
+                          // onPressed: _nextActivity,
+                        ),
+                      ])),
+                  SizedBox(
+                    width: 15.0,
+                    height: 30.0,
                   ),
-                  Spacer(),
-                  InkWell(
-                      onTap: () {
-                        if (messageText.text.length == 0) {
-                        } else {
-                          _sendMessage(messageText.text);
-                        }
-                      },
-                      child: Icon(Icons.send))
+                  SvgPicture.asset(iconLogo,
+                      matchTextDirection: false, height: 70.0, width: 68.0),
+                  SizedBox(
+                    height: 60.0,
+                  ),
                 ],
               ),
-            )
-          ],
+              Expanded(
+                  child: FutureBuilder(
+                initialData: null,
+                future: chatList,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    var chatList = snapshot.data.messageList;
+                    return chatList.length == 0
+                        ? Container(
+                            color: Colors.white,
+                            child: Text("No message yet"),
+                          )
+                        : ListView.builder(
+                            padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.02,
+                              right: MediaQuery.of(context).size.width * 0.02,
+                              // top: MediaQuery.of(context).size.width * 0.00,
+                              // bottom: MediaQuery.of(context).size.width * 0.00,
+                            ),
+                            reverse: true,
+                            shrinkWrap: true,
+                            itemCount: chatList.length,
+                            itemBuilder: (context, int index) {
+                              MessageList chatModel = chatList[index];
+                              return ChatList(chatModel: chatModel);
+                            });
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              )),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.08,
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.02,
+                    right: MediaQuery.of(context).size.width * 0.02),
+                child: Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      //color: Colors.red,
+                      child: TextFormField(
+                        controller: messageText,
+                        keyboardType: TextInputType.multiline,
+                        decoration: InputDecoration(
+                          hintText: "Write message",
+                        ),
+                        onChanged: (value) {
+                          print("val..." + value.toString());
+                        },
+                      ),
+                    ),
+                    Spacer(),
+                    InkWell(
+                        onTap: () {
+                          if (messageText.text.length == 0) {
+                          } else {
+                            _sendMessage(messageText.text);
+                          }
+                        },
+                        child: Icon(Icons.send))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

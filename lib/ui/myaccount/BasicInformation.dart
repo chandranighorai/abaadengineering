@@ -24,6 +24,7 @@ class _BasicInformationState extends State<BasicInformation> {
     //print("Strinf...." + widget.option.toString());
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    print("lName..." + widget.lname.toString());
     return Scaffold(
       body: SafeArea(
           child: Column(

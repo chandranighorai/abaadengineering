@@ -29,100 +29,103 @@ class _CustomerFeedbackState extends State<CustomerFeedback> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Column(
-          children: [
-            Row(
-              children: <Widget>[
-                Container(
-                    margin: EdgeInsets.only(top: 30.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10.0),
-                          bottomRight: Radius.circular(10.0)),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Row(
+                children: <Widget>[
+                  Container(
+                      //margin: EdgeInsets.only(top: 30.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0)),
+                        gradient: LinearGradient(
+                            colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
+                            begin: Alignment.centerRight,
+                            end: Alignment.centerLeft),
+                      ),
+                      child: Row(children: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            'Customer \nFeedback',
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
+                          ),
+                          // color: Colors.blueAccent,
+                          padding: EdgeInsets.fromLTRB(15.0, 15.0, 120.0, 15.0),
+                          // color: Colors.white,
+                          // onPressed: _nextActivity,
+                        ),
+                      ])),
+                  SizedBox(width: 15.0),
+
+                  Container(
+                    //margin: EdgeInsets.only(top: 40.0),
+                    child: SvgPicture.asset(
+                      iconLogo,
+                      matchTextDirection: false,
+                      height: 70.0,
+                      width: 68.0,
+                    ),
+                  )
+
+                  //  SizedBox(height: 60.0,),
+                ],
+              ),
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - 114.0,
+                  child: FutureBuilder(
+                      initialData: null,
+                      future: _feedbackModel,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          var feedBack = snapshot.data.testimonialList;
+                          return feedBack.length == 0
+                              ? Center(
+                                  child: Text("No Feedback Yet"),
+                                )
+                              : ListView.builder(
+                                  itemCount: feedBack.length,
+                                  itemBuilder: (BuildContext context, index) {
+                                    TestimonialList list = feedBack[index];
+                                    return FeedBackModelList(
+                                        testimonialList: list);
+                                  });
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      }),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    child: CircularGradientButton(
+                      child: Icon(
+                        Icons.chevron_left,
+                        color: Colors.white,
+                      ),
+                      callback: () {
+                        Navigator.pop(context);
+                      },
                       gradient: LinearGradient(
-                          colors: [Color(0xFF700A81), Color(0xFFE91EA5)],
+                          colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
                           begin: Alignment.centerRight,
                           end: Alignment.centerLeft),
                     ),
-                    child: Row(children: <Widget>[
-                      FlatButton(
-                        child: Text(
-                          'Customer \nFeedback',
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
-                        ),
-                        // color: Colors.blueAccent,
-                        padding: EdgeInsets.fromLTRB(15.0, 15.0, 120.0, 15.0),
-                        // color: Colors.white,
-                        // onPressed: _nextActivity,
-                      ),
-                    ])),
-                SizedBox(width: 15.0),
-
-                Container(
-                  margin: EdgeInsets.only(top: 40.0),
-                  child: SvgPicture.asset(
-                    iconLogo,
-                    matchTextDirection: false,
-                    height: 70.0,
-                    width: 68.0,
-                  ),
-                )
-
-                //  SizedBox(height: 60.0,),
-              ],
-            ),
-            Expanded(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height - 114.0,
-                child: FutureBuilder(
-                    initialData: null,
-                    future: _feedbackModel,
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        var feedBack = snapshot.data.testimonialList;
-                        return feedBack.length == 0
-                            ? Center(
-                                child: Text("No Feedback Yet"),
-                              )
-                            : ListView.builder(
-                                itemCount: feedBack.length,
-                                itemBuilder: (BuildContext context, index) {
-                                  TestimonialList list = feedBack[index];
-                                  return FeedBackModelList(
-                                      testimonialList: list);
-                                });
-                      } else {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    }),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  child: CircularGradientButton(
-                    child: Icon(
-                      Icons.chevron_left,
-                      color: Colors.white,
-                    ),
-                    callback: () {
-                      Navigator.pop(context);
-                    },
-                    gradient: LinearGradient(
-                        colors: [Color(0xFFE91E63), Color(0xFFFFC107)],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
