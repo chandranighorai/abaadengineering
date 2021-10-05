@@ -75,47 +75,11 @@ class _ChatRoomState extends State<ChatRoom> {
       body: Container(
         //height: MediaQuery.of(context).size.height,
         //width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.all(0),
         child: SafeArea(
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              // Row(
-              //   children: <Widget>[
-              //     //SizedBox(height: 140.0),
-              //     Container(
-              //         decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.only(
-              //               topRight: Radius.circular(10.0),
-              //               bottomRight: Radius.circular(10.0)),
-              //           gradient: LinearGradient(
-              //               colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
-              //               begin: Alignment.centerRight,
-              //               end: Alignment.centerLeft),
-              //         ),
-              //         child: Row(children: <Widget>[
-              //           FlatButton(
-              //             child: Text(
-              //               'Chat Room',
-              //               style: TextStyle(fontSize: 20.0, color: Colors.white),
-              //             ),
-              //             // color: Colors.blueAccent,
-              //             padding: EdgeInsets.fromLTRB(15.0, 15.0, 170.0, 15.0),
-
-              //             // color: Colors.white,
-              //             // onPressed: _nextActivity,
-              //           ),
-              //         ])),
-              //     // SizedBox(
-              //     //   width: 15.0,
-              //     //   height: 30.0,
-              //     // ),
-              //     SvgPicture.asset(iconLogo,
-              //         matchTextDirection: false, height: 70.0, width: 68.0),
-              //     SizedBox(
-              //       height: 60.0,
-              //     ),
-              //   ],
-              // ),
+            children: [
               Row(
                 children: <Widget>[
                   //SizedBox(height: 140.0),
@@ -132,7 +96,7 @@ class _ChatRoomState extends State<ChatRoom> {
                       child: Row(children: <Widget>[
                         FlatButton(
                           child: Text(
-                            'Chat Room',
+                            'Chat \nRoom',
                             style:
                                 TextStyle(fontSize: 20.0, color: Colors.white),
                           ),
@@ -154,6 +118,81 @@ class _ChatRoomState extends State<ChatRoom> {
                   ),
                 ],
               ),
+              // Row(
+              //   children: <Widget>[
+              //     //SizedBox(height: 140.0),
+              //     Container(
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.only(
+              //               topRight: Radius.circular(10.0),
+              //               bottomRight: Radius.circular(10.0)),
+              //           gradient: LinearGradient(
+              //               colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
+              //               begin: Alignment.centerRight,
+              //               end: Alignment.centerLeft),
+              //         ),
+              //         child: Row(children: <Widget>[
+              //           FlatButton(
+              //             child: Text(
+              //               'Chat Room',
+              //               style: TextStyle(fontSize: 20.0, color: Colors.white),
+              //             ),
+              //             // color: Colors.blueAccent,
+              //             padding: EdgeInsets.fromLTRB(15.0, 15.0, 170.0, 15.0),
+              //             // color: Colors.white,
+              //             // onPressed: _nextActivity,
+              //           ),
+              //         ])),
+              //     // SizedBox(
+              //     //   width: 15.0,
+              //     //   height: 30.0,
+              //     // ),
+              //     SvgPicture.asset(iconLogo,
+              //         matchTextDirection: false, height: 70.0, width: 68.0),
+              //     SizedBox(
+              //       height: 60.0,
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   children: [
+              //     //SizedBox(height: 00.0),
+              //     Container(
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.only(
+              //               topRight: Radius.circular(10.0),
+              //               bottomRight: Radius.circular(10.0)),
+              //           gradient: LinearGradient(
+              //               colors: [Color(0xFFFFC107), Color(0xFF03A9F4)],
+              //               begin: Alignment.centerRight,
+              //               end: Alignment.centerLeft),
+              //         ),
+              //         child: Row(children: <Widget>[
+              //           FlatButton(
+              //             child: Text(
+              //               'Chat Room',
+              //               style:
+              //                   TextStyle(fontSize: 20.0, color: Colors.white),
+              //             ),
+              //             // color: Colors.blueAccent,
+              //             padding: EdgeInsets.fromLTRB(15.0, 15.0, 170.0, 15.0),
+
+              //             // color: Colors.white,
+              //             // onPressed: _nextActivity,
+              //           ),
+              //         ])),
+              //     // SizedBox(
+              //     //   width: 15.0,
+              //     //   height: 30.0,
+              //     // ),
+              //     Spacer(),
+              //     SvgPicture.asset(iconLogo,
+              //         matchTextDirection: false, height: 70.0, width: 68.0),
+              //     // SizedBox(
+              //     //   height: 60.0,
+              //     // ),
+              //   ],
+              // ),
               Expanded(
                   child: FutureBuilder(
                 initialData: null,

@@ -37,6 +37,8 @@ class _ContactUsActivityState extends State<ContactUsActivity> {
   @override
   Widget build(BuildContext context) {
     print("UserType..." + widget.userType.toString());
+    print("UserType..." + profile.toString());
+
     return Scaffold(
       body: Container(
           child: SafeArea(
